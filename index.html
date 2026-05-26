@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบลงทะเบียนอบรมความปลอดภัย</title>
+    <title>ระบบลงทะเบียนอบรมความปลอดภัย (Real-time)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -14,14 +14,12 @@
 
     <div class="max-w-6xl mx-auto">
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-gray-800 mb-2">🚨 ระบบลงทะเบียนอบรมคู่มือความปลอดภัย (JSA & โรคจากการทำงาน)</h1>
-            <p class="text-gray-600 text-lg">พนักงานทั้งหมด 64 คน | จำกัดสิทธิ์รอบละ 16 คนเท่านั้น (สิทธิ์ตามลำดับการลงทะเบียน)</p>
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">🚨 ระบบลงทะเบียนอบรมคู่มือความปลอดภัย (Real-time)</h1>
+            <p class="text-gray-600 text-lg">พนักงานทั้งหมด 64 คน | จำกัดสิทธิ์รอบละ 16 คน (ข้อมูลเชื่อมต่อออนไลน์ทั้งโรงงาน)</p>
         </div>
 
         <div class="bg-white rounded-xl shadow-md p-6 mb-8 max-w-2xl mx-auto border border-gray-100">
-            <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center gap-2">
-                ✍️ กรอกข้อมูลเพื่อลงทะเบียน / ยกเลิกรายชื่อ
-            </h2>
+            <h2 class="text-xl font-semibold text-gray-700 mb-4 flex items-center gap-2">✍️ กรอกข้อมูลลงทะเบียน / ยกเลิกรายชื่อ</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">รหัสพนักงาน</label>
@@ -44,58 +42,46 @@
             </div>
 
             <div class="flex gap-4">
-                <button onclick="register()" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-4 rounded-lg transition duration-200 shadow-sm">
-                    ✅ ยืนยันลงทะเบียน
-                </button>
-                <button onclick="cancelRegister()" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-medium py-2.5 px-4 rounded-lg transition duration-200 shadow-sm">
-                    ❌ ยกเลิกการลงทะเบียน
-                </button>
+                <button onclick="register()" class="flex-1 bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 px-4 rounded-lg transition duration-200 shadow-sm">✅ ยืนยันลงทะเบียน</button>
+                <button onclick="cancelRegister()" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-medium py-2.5 px-4 rounded-lg transition duration-200 shadow-sm">❌ ยกเลิกการลงทะเบียน</button>
             </div>
         </div>
 
         <hr class="border-gray-200 my-8">
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div id="round-box-1" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="bg-blue-600 text-white p-4">
                     <h3 class="font-bold text-lg">รอบที่ 1</h3>
                     <p class="text-sm opacity-90">ศุกร์ 26 มิ.ย. 2569</p>
-                    <div class="mt-2 text-xs font-semibold bg-blue-700 inline-block px-2 py-1 rounded">
-                        ที่นั่งว่าง: <span id="seat-count-1">16</span>/16
-                    </div>
+                    <div class="mt-2 text-xs font-semibold bg-blue-700 inline-block px-2 py-1 rounded">ที่นั่งว่าง: <span id="seat-count-1">16</span>/16</div>
                 </div>
                 <ul id="list-1" class="p-4 divide-y divide-gray-100 min-h-[300px] text-sm text-gray-600"></ul>
             </div>
 
-            <div id="round-box-2" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="bg-purple-600 text-white p-4">
                     <h3 class="font-bold text-lg">รอบที่ 2</h3>
                     <p class="text-sm opacity-90">ศุกร์ 3 ก.ค. 2569</p>
-                    <div class="mt-2 text-xs font-semibold bg-purple-700 inline-block px-2 py-1 rounded">
-                        ที่นั่งว่าง: <span id="seat-count-2">16</span>/16
-                    </div>
+                    <div class="mt-2 text-xs font-semibold bg-purple-700 inline-block px-2 py-1 rounded">ที่นั่งว่าง: <span id="seat-count-2">16</span>/16</div>
                 </div>
                 <ul id="list-2" class="p-4 divide-y divide-gray-100 min-h-[300px] text-sm text-gray-600"></ul>
             </div>
 
-            <div id="round-box-3" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="bg-indigo-600 text-white p-4">
                     <h3 class="font-bold text-lg">รอบที่ 3</h3>
                     <p class="text-sm opacity-90">ศุกร์ 10 ก.ค. 2569</p>
-                    <div class="mt-2 text-xs font-semibold bg-indigo-700 inline-block px-2 py-1 rounded">
-                        ที่นั่งว่าง: <span id="seat-count-3">16</span>/16
-                    </div>
+                    <div class="mt-2 text-xs font-semibold bg-indigo-700 inline-block px-2 py-1 rounded">ที่นั่งว่าง: <span id="seat-count-3">16</span>/16</div>
                 </div>
                 <ul id="list-3" class="p-4 divide-y divide-gray-100 min-h-[300px] text-sm text-gray-600"></ul>
             </div>
 
-            <div id="round-box-4" class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="bg-teal-600 text-white p-4">
                     <h3 class="font-bold text-lg">รอบที่ 4</h3>
                     <p class="text-sm opacity-90">ศุกร์ 17 ก.ค. 2569</p>
-                    <div class="mt-2 text-xs font-semibold bg-teal-700 inline-block px-2 py-1 rounded">
-                        ที่นั่งว่าง: <span id="seat-count-4">16</span>/16
-                    </div>
+                    <div class="mt-2 text-xs font-semibold bg-teal-700 inline-block px-2 py-1 rounded">ที่นั่งว่าง: <span id="seat-count-4">16</span>/16</div>
                 </div>
                 <ul id="list-4" class="p-4 divide-y divide-gray-100 min-h-[300px] text-sm text-gray-600"></ul>
             </div>
@@ -103,33 +89,49 @@
     </div>
 
     <script>
-        // โครงสร้างข้อมูลเริ่มต้นเก็บใน LocalStorage เพื่อให้ข้อมูลคงอยู่เมื่อรีเฟรชหน้าเว็บ
-        let db = JSON.parse(localStorage.getItem('safety_training_db')) || {
-            1: [], 2: [], 3: [], 4: []
-        };
-
+        // กำหนด URL ของ Firebase Realtime Database ของคุณจุฑารัตน์โดยตรง
+        const DB_URL = "https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations.json";
         const MAX_SEATS = 16;
+        let globalData = {};
 
-        // ฟังก์ชันช่วยบันทึกข้อมูลและอัปเดตหน้าจอทันที (Real-time)
-        function updateUI() {
-            localStorage.setItem('safety_training_db', JSON.stringify(db));
+        // ฟังก์ชันดึงข้อมูลจากออนไลน์แบบ Real-time
+        function fetchDatabase() {
+            fetch(DB_URL)
+                .then(res => res.json())
+                .then(data => {
+                    globalData = data || {};
+                    renderUI();
+                })
+                .catch(err => console.error("Error fetching data:", err));
+        }
+
+        // ฟังก์ชันจัดกลุ่มและแสดงผลรายชื่อบนหน้าจอ
+        function renderUI() {
+            let rounds = { 1: [], 2: [], 3: [], 4: [] };
             
+            // จัดหมวดหมู่ข้อมูลที่ได้จาก Firebase
+            Object.keys(globalData).forEach(key => {
+                let item = globalData[key];
+                if (rounds[item.round]) {
+                    rounds[item.round].push({ firebaseKey: key, id: item.id, name: item.name });
+                }
+            });
+
+            // อัปเดตตารางทั้ง 4 รอบ
             for (let i = 1; i <= 4; i++) {
                 const listElement = document.getElementById(`list-${i}`);
                 const seatCountElement = document.getElementById(`seat-count-${i}`);
                 
-                // คำนวณที่นั่งว่าง
-                const remainingSeats = MAX_SEATS - db[i].length;
+                const remainingSeats = MAX_SEATS - rounds[i].length;
                 seatCountElement.innerText = remainingSeats;
 
-                // อัปเดตรายชื่อพนักงานในรอบนั้นๆ ตามลำดับก่อน-หลัง
                 listElement.innerHTML = '';
-                if (db[i].length === 0) {
+                if (rounds[i].length === 0) {
                     listElement.innerHTML = `<li class="py-4 text-center text-gray-400 italic">ยังไม่มีผู้ลงทะเบียน</li>`;
                 } else {
-                    db[i].forEach((emp, index) => {
+                    rounds[i].forEach((emp, index) => {
                         listElement.innerHTML += `
-                            <li class="py-2 flex justify-between items-center animate-fade-in">
+                            <li class="py-2 flex justify-between items-center">
                                 <span class="font-medium text-gray-700">${index + 1}. [${emp.id}] ${emp.name}</span>
                                 <span class="text-xs bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">คนที่ ${index + 1}</span>
                             </li>
@@ -139,15 +141,12 @@
             }
         }
 
-        // ตรวจสอบว่ารหัสพนักงานนี้เคยลงทะเบียนรอบไหนไปแล้วบ้างหรือยัง
+        // ตรวจสอบรหัสซ้ำบนฐานข้อมูลออนไลน์
         function checkDuplicateID(id) {
-            for (let r in db) {
-                if (db[r].some(emp => emp.id === id)) return r;
-            }
-            return null;
+            return Object.values(globalData).find(item => item.id === id);
         }
 
-        // ฟังก์ชันการลงทะเบียน
+        // ฟังก์ชันลงทะเบียน (บันทึกขึ้นฐานข้อมูลออนไลน์)
         function register() {
             const id = document.getElementById('empId').value.trim();
             const name = document.getElementById('empName').value.trim();
@@ -158,27 +157,31 @@
                 return;
             }
 
-            // 1. ตรวจสอบการลงทะเบียนซ้ำ
-            const registeredRound = checkDuplicateID(id);
-            if (registeredRound) {
-                alert(`❌ รหัสพนักงานนี้เคยลงทะเบียนไว้แล้วใน "รอบที่ ${registeredRound}" กรุณายกเลิกรอบเดิมก่อนเปลี่ยนรอบครับ`);
+            if (checkDuplicateID(id)) {
+                alert(`❌ รหัสพนักงานนี้เคยลงทะเบียนไว้แล้วในระบบ กรุณายกเลิกรอบเดิมก่อนหากต้องการเปลี่ยนรอบครับ`);
                 return;
             }
 
-            // 2. ตรวจสอบว่ารอบนั้นเต็มหรือยัง
-            if (db[round].length >= MAX_SEATS) {
+            // นับจำนวนคนในรอบนั้น ๆ จากข้อมูลออนไลน์ล่าสุด
+            const currentRoundCount = Object.values(globalData).filter(item => item.round === round).length;
+            if (currentRoundCount >= MAX_SEATS) {
                 alert('🚨 ขออภัยครับ รอบนี้มีผู้ลงทะเบียนเต็ม 16 คนแล้ว โปรดเลือกรอบอื่น');
                 return;
             }
 
-            // 3. บันทึกข้อมูล
-            db[round].push({ id: id, name: name });
-            updateUI();
-            clearInputs();
-            alert('🎉 ลงทะเบียนสำเร็จเรียบร้อยครับ!');
+            // ส่งข้อมูลไปบันทึกที่ Firebase
+            fetch(DB_URL, {
+                method: 'POST',
+                body: JSON.stringify({ id: id, name: name, round: round })
+            })
+            .then(() => {
+                clearInputs();
+                alert('🎉 ลงทะเบียนออนไลน์สำเร็จเรียบร้อยครับ!');
+                fetchDatabase(); // ดึงข้อมูลใหม่ทันที
+            });
         }
 
-        // ฟังก์ชันการยกเลิกการลงทะเบียนด้วยรหัสพนักงาน
+        // ฟังก์ชันยกเลิกการลงทะเบียนออนไลน์
         function cancelRegister() {
             const id = document.getElementById('empId').value.trim();
             const round = document.getElementById('roundSelect').value;
@@ -188,18 +191,23 @@
                 return;
             }
 
-            // ค้นหาตำแหน่งของรหัสพนักงานในรอบที่เลือก
-            const index = db[round].findIndex(emp => emp.id === id);
+            // ค้นหาคีย์ของข้อมูลใน Firebase ที่ตรงกับรหัสพนักงานและรอบที่เลือก
+            const target = Object.keys(globalData).find(key => globalData[key].id === id && globalData[key].round === round);
 
-            if (index !== -1) {
+            if (target) {
                 if (confirm(`คุณต้องการยกเลิกรายชื่อรหัสพนักงาน ${id} ในรอบที่ ${round} ใช่หรือไม่?`)) {
-                    db[round].splice(index, 1); // ลบรายชื่อออกจากอาร์เรย์
-                    updateUI();
-                    clearInputs();
-                    alert('🗑️ ยกเลิกการลงทะเบียนเรียบร้อยแล้วครับ');
+                    // ส่งคำสั่งลบไปยัง Firebase เจาะจงตัวแปรนั้น ๆ
+                    fetch(`https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations/${target}.json`, {
+                        method: 'DELETE'
+                    })
+                    .then(() => {
+                        clearInputs();
+                        alert('🗑️ ยกเลิกการลงทะเบียนออนไลน์เรียบร้อยแล้วครับ');
+                        fetchDatabase(); // ดึงข้อมูลใหม่ทันที
+                    });
                 }
             } else {
-                alert(`❌ ไม่พบรหัสพนักงาน ${id} ในรอบที่เลือกนี้ กรุณาตรวจสอบรอบการอบรมที่เลือกให้ถูกต้องครับ`);
+                alert(`❌ ไม่พบรหัสพนักงาน ${id} ในรอบที่เลือกนี้ กรุณาตรวจสอบรอบการอบรมให้ถูกต้องครับ`);
             }
         }
 
@@ -208,8 +216,9 @@
             document.getElementById('empName').value = '';
         }
 
-        // สั่งให้แสดงผลข้อมูลทันทีเมื่อเปิดหน้าเว็บครั้งแรก
-        updateUI();
+        // ตั้งเวลาให้ดึงข้อมูลใหม่โดยอัตโนมัติทุก ๆ 3 วินาที (เพื่อให้จอบนเครื่องอื่น ๆ อัปเดตตามแบบอัตโนมัติ)
+        fetchDatabase();
+        setInterval(fetchDatabase, 3000);
     </script>
 </body>
 </html>
