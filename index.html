@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบลงทะเบียนอบรมคู่มือความปลอดภัยฯ</title>
+    <title>ระบบลงทะเบียนอบรมคู่มือความปลอดภัยฯ (เฉพาะฝ่ายออฟฟิศ)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2=family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Sarabun', sans-serif; background-color: #f8fafc; }
         /* สไตล์พิเศษเพื่อให้ติ๊กเลือกกล่องรอบแล้วเปลี่ยนสีทันที */
@@ -38,7 +38,7 @@
         <div class="text-center mb-10">
             <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">Safety First</span>
             <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">🚨 ระบบลงทะเบียนอบรมคู่มือความปลอดภัยฯ</h1>
-            <p class="text-slate-500 text-base sm:text-lg mt-2 max-w-2xl mx-auto font-light">จำกัดสิทธิ์รอบละ 16 คน</p>
+            <p class="text-red-500 text-base sm:text-lg mt-2 max-w-2xl mx-auto font-bold animate-pulse">⚠️ ลงทะเบียนได้เฉพาะฝ่ายออฟฟิศเท่านั้น</p>
         </div>
 
         <div class="bg-white rounded-2xl shadow-xl shadow-slate-100/50 p-6 sm:p-8 border border-slate-100 mb-12 max-w-4xl mx-auto">
@@ -52,7 +52,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-1.5">รหัสพนักงาน</label>
-                    <input type="text" id="empId" placeholder="" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-4 focus:ring-green-500/10 focus:border-green-500 focus:outline-none transition-all">
+                    <input type="text" id="empId" placeholder="กรอกรหัสพนักงาน" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-4 focus:ring-green-500/10 focus:border-green-500 focus:outline-none transition-all">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-1.5">ชื่อ - นามสกุล</label>
@@ -62,29 +62,23 @@
 
             <div class="mb-6">
                 <label class="block text-sm font-semibold text-slate-700 mb-3">เลือกรอบที่ต้องการอบรม (คลิกเลือกช่องที่ต้องการ)</label>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <input type="radio" id="r1" name="regRound" value="1" class="hidden" checked>
                     <label for="r1" class="flex items-center gap-3 p-3.5 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
                         <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 1</span><span class="text-xs text-slate-500">ศุกร์ 26 มิ.ย. (08:00 - 12:00)</span></div>
+                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 1</span><span class="text-xs text-slate-500">ศุกร์ 14 ส.ค. (08:00 - 12:00)</span></div>
                     </label>
 
                     <input type="radio" id="r2" name="regRound" value="2" class="hidden">
                     <label for="r2" class="flex items-center gap-3 p-3.5 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
                         <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 2</span><span class="text-xs text-slate-500">ศุกร์ 3 ก.ค. (08:00 - 12:00)</span></div>
+                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 2</span><span class="text-xs text-slate-500">ศุกร์ 21 ส.ค. (08:00 - 12:00)</span></div>
                     </label>
 
                     <input type="radio" id="r3" name="regRound" value="3" class="hidden">
                     <label for="r3" class="flex items-center gap-3 p-3.5 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
                         <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 3</span><span class="text-xs text-slate-500">ศุกร์ 10 ก.ค. (08:00 - 12:00)</span></div>
-                    </label>
-
-                    <input type="radio" id="r4" name="regRound" value="4" class="hidden">
-                    <label for="r4" class="flex items-center gap-3 p-3.5 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
-                        <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 4</span><span class="text-xs text-slate-500">ศุกร์ 17 ก.ค. (08:00 - 12:00)</span></div>
+                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 3</span><span class="text-xs text-slate-500">ศุกร์ 28 ส.ค. (08:00 - 12:00)</span></div>
                     </label>
                 </div>
             </div>
@@ -98,19 +92,15 @@
             <div class="relative flex justify-center text-sm font-medium"><span class="bg-[#f8fafc] px-4 text-slate-400 font-bold">📊 สรุปรายชื่อที่ลงทะเบียน</span></div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
             <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
                     <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg">รอบที่ 1</h3>
-                                <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 26 มิถุนายน 2569</p>
-                            </div>
-                        </div>
-                        <div class="mt-4 flex justify-between items-center bg-black/10 rounded-xl px-3 py-2 text-xs font-semibold">
-                            <span>ที่นั่งว่างล่าสุด:</span>
-                            <span class="bg-white text-blue-700 px-2 py-0.5 rounded-md"><span id="seat-count-1">16</span> / 16</span>
+                        <h3 class="font-bold text-lg">รอบที่ 1</h3>
+                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 14 สิงหาคม 2569</p>
+                        <div class="mt-3 flex justify-between items-center bg-black/10 rounded-xl px-3 py-1.5 text-xs font-semibold">
+                            <span>ผู้ลงทะเบียนทั้งหมด:</span>
+                            <span class="bg-white text-blue-700 px-2 py-0.5 rounded-md" id="total-count-1">0 คน</span>
                         </div>
                     </div>
                     <ul id="list-1" class="p-4 divide-y divide-slate-50 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1"></ul>
@@ -120,15 +110,11 @@
             <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
                     <div class="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white p-5">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg">รอบที่ 2</h3>
-                                <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 3 กรกฎาคม 2569</p>
-                            </div>
-                        </div>
-                        <div class="mt-4 flex justify-between items-center bg-black/10 rounded-xl px-3 py-2 text-xs font-semibold">
-                            <span>ที่นั่งว่างล่าสุด:</span>
-                            <span class="bg-white text-purple-700 px-2 py-0.5 rounded-md"><span id="seat-count-2">16</span> / 16</span>
+                        <h3 class="font-bold text-lg">รอบที่ 2</h3>
+                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 21 สิงหาคม 2569</p>
+                        <div class="mt-3 flex justify-between items-center bg-black/10 rounded-xl px-3 py-1.5 text-xs font-semibold">
+                            <span>ผู้ลงทะเบียนทั้งหมด:</span>
+                            <span class="bg-white text-purple-700 px-2 py-0.5 rounded-md" id="total-count-2">0 คน</span>
                         </div>
                     </div>
                     <ul id="list-2" class="p-4 divide-y divide-slate-50 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1"></ul>
@@ -138,36 +124,14 @@
             <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between">
                 <div>
                     <div class="bg-gradient-to-r from-indigo-600 to-cyan-600 text-white p-5">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg">รอบที่ 3</h3>
-                                <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 10 กรกฎาคม 2569</p>
-                            </div>
-                        </div>
-                        <div class="mt-4 flex justify-between items-center bg-black/10 rounded-xl px-3 py-2 text-xs font-semibold">
-                            <span>ที่นั่งว่างล่าสุด:</span>
-                            <span class="bg-white text-indigo-700 px-2 py-0.5 rounded-md"><span id="seat-count-3">16</span> / 16</span>
+                        <h3 class="font-bold text-lg">รอบที่ 3</h3>
+                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 28 สิงหาคม 2569</p>
+                        <div class="mt-3 flex justify-between items-center bg-black/10 rounded-xl px-3 py-1.5 text-xs font-semibold">
+                            <span>ผู้ลงทะเบียนทั้งหมด:</span>
+                            <span class="bg-white text-indigo-700 px-2 py-0.5 rounded-md" id="total-count-3">0 คน</span>
                         </div>
                     </div>
                     <ul id="list-3" class="p-4 divide-y divide-slate-50 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1"></ul>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between">
-                <div>
-                    <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-5">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-bold text-lg">รอบที่ 4</h3>
-                                <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 17 กรกฎาคม 2569</p>
-                            </div>
-                        </div>
-                        <div class="mt-4 flex justify-between items-center bg-black/10 rounded-xl px-3 py-2 text-xs font-semibold">
-                            <span>ที่นั่งว่างล่าสุด:</span>
-                            <span class="bg-white text-emerald-700 px-2 py-0.5 rounded-md"><span id="seat-count-4">16</span> / 16</span>
-                        </div>
-                    </div>
-                    <ul id="list-4" class="p-4 divide-y divide-slate-50 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1"></ul>
                 </div>
             </div>
         </div>
@@ -188,33 +152,27 @@
             <div class="space-y-5 mb-6">
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-1.5">รหัสพนักงานที่ต้องการยกเลิก</label>
-                    <input type="text" id="cancelEmpId" placeholder="" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/10 focus:border-red-500 focus:outline-none transition-all">
+                    <input type="text" id="cancelEmpId" placeholder="กรอกรหัสพนักงานเพื่อยกเลิก" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/10 focus:border-red-500 focus:outline-none transition-all">
                 </div>
                 <div>
                     <label class="block text-sm font-semibold text-slate-700 mb-3">เลือกรอบที่ต้องการลบชื่อออก</label>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
                         <input type="radio" id="cr1" name="cancelRound" value="1" class="cancel-radio hidden" checked>
-                        <label for="cr1" class="flex items-center gap-3 p-2.5 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
+                        <label for="cr1" class="flex items-center gap-2 p-2.5 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all text-center justify-center">
                             <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                            <span class="text-sm font-medium text-slate-700">รอบที่ 1 (26 มิ.ย.)</span>
+                            <span class="text-xs font-medium text-slate-700">รอบ 1 (14 ส.ค.)</span>
                         </label>
 
                         <input type="radio" id="cr2" name="cancelRound" value="2" class="cancel-radio hidden">
-                        <label for="cr2" class="flex items-center gap-3 p-2.5 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
+                        <label for="cr2" class="flex items-center gap-2 p-2.5 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all text-center justify-center">
                             <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                            <span class="text-sm font-medium text-slate-700">รอบที่ 2 (3 ก.ค.)</span>
+                            <span class="text-xs font-medium text-slate-700">รอบ 2 (21 ส.ค.)</span>
                         </label>
 
                         <input type="radio" id="cr3" name="cancelRound" value="3" class="cancel-radio hidden">
-                        <label for="cr3" class="flex items-center gap-3 p-2.5 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
+                        <label for="cr3" class="flex items-center gap-2 p-2.5 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all text-center justify-center">
                             <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                            <span class="text-sm font-medium text-slate-700">รอบที่ 3 (10 ก.ค.)</span>
-                        </label>
-
-                        <input type="radio" id="cr4" name="cancelRound" value="4" class="cancel-radio hidden">
-                        <label for="cr4" class="flex items-center gap-3 p-2.5 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
-                            <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                            <span class="text-sm font-medium text-slate-700">รอบที่ 4 (17 ก.ค.)</span>
+                            <span class="text-xs font-medium text-slate-700">รอบ 3 (28 ส.ค.)</span>
                         </label>
                     </div>
                 </div>
@@ -227,7 +185,6 @@
 
     <script>
         const DB_URL = "https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations.json";
-        const MAX_SEATS = 16;
         let globalData = {};
 
         function fetchDatabase() {
@@ -241,7 +198,7 @@
         }
 
         function renderUI() {
-            let rounds = { 1: [], 2: [], 3: [], 4: [] };
+            let rounds = { 1: [], 2: [], 3: [] }; // ลดเหลือ 3 รอบ
             
             Object.keys(globalData).forEach(key => {
                 let item = globalData[key];
@@ -250,28 +207,33 @@
                 }
             });
 
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= 3; i++) {
                 const listElement = document.getElementById(`list-${i}`);
-                const seatCountElement = document.getElementById(`seat-count-${i}`);
+                const totalCountElement = document.getElementById(`total-count-${i}`);
                 
-                const remainingSeats = MAX_SEATS - rounds[i].length;
-                seatCountElement.innerText = remainingSeats;
+                // อัปเดตจำนวนคนที่ลงทะเบียนทั้งหมดของรอบนั้นๆ
+                totalCountElement.innerText = `${rounds[i].length} คน`;
 
-                listElement.innerHTML = '';
+                let newListHTML = '';
                 if (rounds[i].length === 0) {
-                    listElement.innerHTML = `<li class="py-8 text-center text-slate-400 italic font-light">ยังไม่มีผู้ลงทะเบียน</li>`;
+                    newListHTML = `<li class="py-8 text-center text-slate-400 italic font-light">ยังไม่มีผู้ลงทะเบียน</li>`;
                 } else {
                     rounds[i].forEach((emp, index) => {
-                        listElement.innerHTML += `
+                        newListHTML += `
                             <li class="py-2.5 flex justify-between items-center border-b border-slate-50 last:border-none">
                                 <div class="flex flex-col">
                                     <span class="font-semibold text-slate-800">${index + 1}. ${emp.name}</span>
                                     <span class="text-xs text-slate-400 font-mono mt-0.5">ID: ${emp.id}</span>
                                 </div>
-                                <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-medium">คิวที่ ${index + 1}</span>
+                                <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-medium">ลำดับที่ ${index + 1}</span>
                             </li>
                         `;
                     });
+                }
+
+                // ป้องกันหน้าจอกระตุกด้วยการตรวจจับ HTML เปลี่ยนแปลงก่อนแทนที่ข้อมูลเดิม
+                if (listElement.innerHTML !== newListHTML) {
+                    listElement.innerHTML = newListHTML;
                 }
             }
         }
@@ -291,27 +253,33 @@
                 return;
             }
 
-            if (checkDuplicateID(id)) {
-                alert(`❌ รหัสพนักงานนี้เคยลงทะเบียนไว้ในระบบแล้ว หากต้องการย้ายรอบกรุณากดลบชื่อที่ช่อง "ยกเลิกการลงทะเบียน" ด้านล่างสุดก่อนครับ`);
-                return;
-            }
+            // คัดกรองและดึงข้อมูลสดก่อนเซฟเพื่อความแม่นยำ ป้องกันรหัสพนักงานซ้ำซ้อน
+            fetch(DB_URL)
+                .then(res => res.json())
+                .then(latestData => {
+                    const currentData = latestData || {};
+                    const isDuplicate = Object.values(currentData).find(item => item.id === id);
 
-            const currentRoundCount = Object.values(globalData).filter(item => item.round === round).length;
-            if (currentRoundCount >= MAX_SEATS) {
-                alert('🚨 ขออภัยครับ รอบที่คุณเลือกมีผู้ลงทะเบียนเต็ม 16 คนแล้ว โปรดเลือกเปิดสิทธิ์รอบอื่นนะครับ');
-                return;
-            }
+                    if (isDuplicate) {
+                        alert(`❌ รหัสพนักงานนี้เคยลงทะเบียนไว้ในระบบแล้ว หากต้องการย้ายรอบกรุณากดลบชื่อที่ช่อง "ยกเลิกการลงทะเบียน" ด้านล่างสุดก่อนครับ`);
+                        return;
+                    }
 
-            fetch(DB_URL, {
-                method: 'POST',
-                body: JSON.stringify({ id: id, name: name, round: round })
-            })
-            .then(() => {
-                document.getElementById('empId').value = '';
-                document.getElementById('empName').value = '';
-                alert('🎉 ระบบออนไลน์ทำการลงทะเบียนเรียบร้อยแล้วครับ!');
-                fetchDatabase();
-            });
+                    // บันทึกข้อมูลลง Firebase (ไม่มีเงื่อนไขโควตา 16 ที่นั่งแล้ว)
+                    return fetch(DB_URL, {
+                        method: 'POST',
+                        body: JSON.stringify({ id: id, name: name, round: round })
+                    });
+                })
+                .then(response => {
+                    if (response) {
+                        document.getElementById('empId').value = '';
+                        document.getElementById('empName').value = '';
+                        alert('🎉 ฝ่ายออฟฟิศลงทะเบียนเรียบร้อยแล้วครับ!');
+                        fetchDatabase();
+                    }
+                })
+                .catch(err => console.error("Error during registration:", err));
         }
 
         function cancelRegister() {
@@ -324,22 +292,27 @@
                 return;
             }
 
-            const target = Object.keys(globalData).find(key => globalData[key].id === id && globalData[key].round === round);
+            fetch(DB_URL)
+                .then(res => res.json())
+                .then(latestData => {
+                    const currentData = latestData || {};
+                    const target = Object.keys(currentData).find(key => currentData[key].id === id && currentData[key].round === round);
 
-            if (target) {
-                if (confirm(`คุณต้องการยกเลิกสิทธิ์รหัสพนักงาน ${id} ในรอบที่ ${round} ใช่หรือไม่?`)) {
-                    fetch(`https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations/${target}.json`, {
-                        method: 'DELETE'
-                    })
-                    .then(() => {
-                        document.getElementById('cancelEmpId').value = '';
-                        alert('🗑️ ดำเนินการลบรายชื่อออกจากระบบออนไลน์สำเร็จแล้ว');
-                        fetchDatabase();
-                    });
-                }
-            } else {
-                alert(`❌ ไม่พบข้อมูลรหัสพนักงาน ${id} ในรอบการอบรมที่เลือก กรุณาตรวจสอบรหัสหรือรอบที่ติ๊กเลือกใหม่อีกครั้งครับ`);
-            }
+                    if (target) {
+                        if (confirm(`คุณต้องการยกเลิกสิทธิ์รหัสพนักงาน ${id} ในรอบที่ ${round} ใช่หรือไม่?`)) {
+                            fetch(`https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations/${target}.json`, {
+                                method: 'DELETE'
+                            })
+                            .then(() => {
+                                document.getElementById('cancelEmpId').value = '';
+                                alert('🗑️ ดำเนินการลบรายชื่อออกจากระบบออนไลน์สำเร็จแล้ว');
+                                fetchDatabase();
+                            });
+                        }
+                    } else {
+                        alert(`❌ ไม่พบข้อมูลรหัสพนักงาน ${id} ในรอบการอบรมที่เลือก กรุณาตรวจสอบรหัสหรือรอบที่ติ๊กเลือกใหม่อีกครั้งครับ`);
+                    }
+                });
         }
 
         fetchDatabase();
