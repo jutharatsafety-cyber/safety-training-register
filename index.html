@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ระบบลงทะเบียนอบรมคู่มือความปลอดภัยฯ (เฉพาะฝ่ายออฟฟิศ)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2=family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Sarabun', sans-serif; background-color: #f8fafc; }
-        /* สไตล์พิเศษเพื่อให้ติ๊กเลือกกล่องรอบแล้วเปลี่ยนสีทันที */
         input[type="radio"]:checked + label {
             border-color: #16a34a;
             background-color: #f0fdf4;
@@ -38,7 +37,10 @@
         <div class="text-center mb-10">
             <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">Safety First</span>
             <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">🚨 ระบบลงทะเบียนอบรมคู่มือความปลอดภัยฯ</h1>
-            <p class="text-red-500 text-base sm:text-lg mt-2 max-w-2xl mx-auto font-bold animate-pulse">⚠️ ลงทะเบียนได้เฉพาะฝ่ายออฟฟิศเท่านั้น</p>
+            <p class="text-red-500 text-base sm:text-lg mt-2 max-w-2xl mx-auto font-bold">⚠️ ลงทะเบียนได้เฉพาะฝ่ายออฟฟิศเท่านั้น</p>
+            <div class="mt-4 inline-block bg-amber-50 border border-amber-200 text-amber-800 text-sm sm:text-base font-semibold px-5 py-2.5 rounded-2xl shadow-sm">
+                ⏳ ต้องลงทะเบียนจองวันอบรม ภายในวันที่ <span class="text-red-600 underline font-bold">30 มิถุนายน 2569 เวลา 12.00 น.</span> เท่านั้น
+            </div>
         </div>
 
         <div class="bg-white rounded-2xl shadow-xl shadow-slate-100/50 p-6 sm:p-8 border border-slate-100 mb-12 max-w-4xl mx-auto">
@@ -51,7 +53,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">รหัสพนักงาน</label>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">รหัสพนักงาน (ใช้ตรวจสอบระบบ/ไม่แสดงในตาราง)</label>
                     <input type="text" id="empId" placeholder="กรอกรหัสพนักงาน" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-4 focus:ring-green-500/10 focus:border-green-500 focus:outline-none transition-all">
                 </div>
                 <div>
@@ -66,19 +68,19 @@
                     <input type="radio" id="r1" name="regRound" value="1" class="hidden" checked>
                     <label for="r1" class="flex items-center gap-3 p-3.5 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
                         <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 1</span><span class="text-xs text-slate-500">ศุกร์ 14 ส.ค. (08:00 - 12:00)</span></div>
+                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 1</span><span class="text-xs text-slate-500">ศุกร์ 14 ส.ค. (08:30 - 12:00)</span></div>
                     </label>
 
                     <input type="radio" id="r2" name="regRound" value="2" class="hidden">
                     <label for="r2" class="flex items-center gap-3 p-3.5 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
                         <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 2</span><span class="text-xs text-slate-500">ศุกร์ 21 ส.ค. (08:00 - 12:00)</span></div>
+                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 2</span><span class="text-xs text-slate-500">ศุกร์ 21 ส.ค. (08:30 - 12:00)</span></div>
                     </label>
 
                     <input type="radio" id="r3" name="regRound" value="3" class="hidden">
                     <label for="r3" class="flex items-center gap-3 p-3.5 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
                         <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 3</span><span class="text-xs text-slate-500">ศุกร์ 28 ส.ค. (08:00 - 12:00)</span></div>
+                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 3</span><span class="text-xs text-slate-500">ศุกร์ 28 ส.ค. (08:30 - 12:00)</span></div>
                     </label>
                 </div>
             </div>
@@ -97,7 +99,7 @@
                 <div>
                     <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5">
                         <h3 class="font-bold text-lg">รอบที่ 1</h3>
-                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 14 สิงหาคม 2569</p>
+                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 14 ส.ค. 2569 (08:30 - 12:00)</p>
                         <div class="mt-3 flex justify-between items-center bg-black/10 rounded-xl px-3 py-1.5 text-xs font-semibold">
                             <span>ผู้ลงทะเบียนทั้งหมด:</span>
                             <span class="bg-white text-blue-700 px-2 py-0.5 rounded-md" id="total-count-1">0 คน</span>
@@ -111,7 +113,7 @@
                 <div>
                     <div class="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white p-5">
                         <h3 class="font-bold text-lg">รอบที่ 2</h3>
-                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 21 สิงหาคม 2569</p>
+                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 21 ส.ค. 2569 (08:30 - 12:00)</p>
                         <div class="mt-3 flex justify-between items-center bg-black/10 rounded-xl px-3 py-1.5 text-xs font-semibold">
                             <span>ผู้ลงทะเบียนทั้งหมด:</span>
                             <span class="bg-white text-purple-700 px-2 py-0.5 rounded-md" id="total-count-2">0 คน</span>
@@ -125,7 +127,7 @@
                 <div>
                     <div class="bg-gradient-to-r from-indigo-600 to-cyan-600 text-white p-5">
                         <h3 class="font-bold text-lg">รอบที่ 3</h3>
-                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 28 สิงหาคม 2569</p>
+                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 28 ส.ค. 2569 (08:30 - 12:00)</p>
                         <div class="mt-3 flex justify-between items-center bg-black/10 rounded-xl px-3 py-1.5 text-xs font-semibold">
                             <span>ผู้ลงทะเบียนทั้งหมด:</span>
                             <span class="bg-white text-indigo-700 px-2 py-0.5 rounded-md" id="total-count-3">0 คน</span>
@@ -187,6 +189,12 @@
         const DB_URL = "https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations.json";
         let globalData = {};
 
+        function isAfterDeadline() {
+            const deadline = new Date("2026-06-30T12:00:00+07:00"); 
+            const now = new Date();
+            return now > deadline;
+        }
+
         function fetchDatabase() {
             fetch(DB_URL)
                 .then(res => res.json())
@@ -198,7 +206,7 @@
         }
 
         function renderUI() {
-            let rounds = { 1: [], 2: [], 3: [] }; // ลดเหลือ 3 รอบ
+            let rounds = { 1: [], 2: [], 3: [] };
             
             Object.keys(globalData).forEach(key => {
                 let item = globalData[key];
@@ -211,7 +219,6 @@
                 const listElement = document.getElementById(`list-${i}`);
                 const totalCountElement = document.getElementById(`total-count-${i}`);
                 
-                // อัปเดตจำนวนคนที่ลงทะเบียนทั้งหมดของรอบนั้นๆ
                 totalCountElement.innerText = `${rounds[i].length} คน`;
 
                 let newListHTML = '';
@@ -220,10 +227,9 @@
                 } else {
                     rounds[i].forEach((emp, index) => {
                         newListHTML += `
-                            <li class="py-2.5 flex justify-between items-center border-b border-slate-50 last:border-none">
+                            <li class="py-3 flex justify-between items-center border-b border-slate-50 last:border-none">
                                 <div class="flex flex-col">
                                     <span class="font-semibold text-slate-800">${index + 1}. ${emp.name}</span>
-                                    <span class="text-xs text-slate-400 font-mono mt-0.5">ID: ${emp.id}</span>
                                 </div>
                                 <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-medium">ลำดับที่ ${index + 1}</span>
                             </li>
@@ -231,29 +237,28 @@
                     });
                 }
 
-                // ป้องกันหน้าจอกระตุกด้วยการตรวจจับ HTML เปลี่ยนแปลงก่อนแทนที่ข้อมูลเดิม
                 if (listElement.innerHTML !== newListHTML) {
                     listElement.innerHTML = newListHTML;
                 }
             }
         }
 
-        function checkDuplicateID(id) {
-            return Object.values(globalData).find(item => item.id === id);
-        }
-
         function register() {
+            if (isAfterDeadline()) {
+                alert('🚨 ขออภัย! ระบบปิดรับลงทะเบียนแล้วเนื่องจากเลยกำหนดเวลา (30 มิ.ย. 2569 เวลา 12.00 น.)');
+                return;
+            }
+
             const id = document.getElementById('empId').value.trim();
             const name = document.getElementById('empName').value.trim();
             const roundRadio = document.querySelector('input[name="regRound"]:checked');
             const round = roundRadio ? roundRadio.value : "1";
 
             if (!id || !name) {
-                alert('⚠️ กรุณากรอกทั้งรหัสพนักงานและชื่อ-นามสกุลให้ครบถ้วนครับ');
+                alert('⚠️ กรุณากรอกทั้งรหัสพนักงานและชื่อ-นามสกุลให้ครบถ้วน');
                 return;
             }
 
-            // คัดกรองและดึงข้อมูลสดก่อนเซฟเพื่อความแม่นยำ ป้องกันรหัสพนักงานซ้ำซ้อน
             fetch(DB_URL)
                 .then(res => res.json())
                 .then(latestData => {
@@ -261,11 +266,10 @@
                     const isDuplicate = Object.values(currentData).find(item => item.id === id);
 
                     if (isDuplicate) {
-                        alert(`❌ รหัสพนักงานนี้เคยลงทะเบียนไว้ในระบบแล้ว หากต้องการย้ายรอบกรุณากดลบชื่อที่ช่อง "ยกเลิกการลงทะเบียน" ด้านล่างสุดก่อนครับ`);
+                        alert(`❌ รหัสพนักงานนี้เคยลงทะเบียนไว้ในระบบแล้ว หากต้องการย้ายรอบกรุณากดลบชื่อที่ช่อง "ยกเลิกการลงทะเบียน" ด้านล่างสุดก่อนค่ะ`);
                         return;
                     }
 
-                    // บันทึกข้อมูลลง Firebase (ไม่มีเงื่อนไขโควตา 16 ที่นั่งแล้ว)
                     return fetch(DB_URL, {
                         method: 'POST',
                         body: JSON.stringify({ id: id, name: name, round: round })
@@ -275,7 +279,7 @@
                     if (response) {
                         document.getElementById('empId').value = '';
                         document.getElementById('empName').value = '';
-                        alert('🎉 ฝ่ายออฟฟิศลงทะเบียนเรียบร้อยแล้วครับ!');
+                        alert('🎉 ฝ่ายออฟฟิศลงทะเบียนเรียบร้อยแล้วค่ะ!');
                         fetchDatabase();
                     }
                 })
@@ -283,12 +287,17 @@
         }
 
         function cancelRegister() {
+            if (isAfterDeadline()) {
+                alert('🚨 ไม่สามารถยกเลิกรายชื่อได้แล้ว เนื่องจากเลยกำหนดเวลาการจัดการข้อมูล (30 มิ.ย. 2569 เวลา 12.00 น.)');
+                return;
+            }
+
             const id = document.getElementById('cancelEmpId').value.trim();
             const cancelRoundRadio = document.querySelector('input[name="cancelRound"]:checked');
             const round = cancelRoundRadio ? cancelRoundRadio.value : "1";
 
             if (!id) {
-                alert('⚠️ กรุณากรอก "รหัสพนักงาน" ในกล่องยกเลิกเพื่อดำเนินการครับ');
+                alert('⚠️ กรุณากรอก "รหัสพนักงาน" ในกล่องยกเลิกเพื่อดำเนินการ');
                 return;
             }
 
@@ -299,7 +308,7 @@
                     const target = Object.keys(currentData).find(key => currentData[key].id === id && currentData[key].round === round);
 
                     if (target) {
-                        if (confirm(`คุณต้องการยกเลิกสิทธิ์รหัสพนักงาน ${id} ในรอบที่ ${round} ใช่หรือไม่?`)) {
+                        if (confirm(`คุณต้องการยกเลิกสิทธิ์รหัสพนักงานนี้ ในรอบที่ ${round} ใช่หรือไม่?`)) {
                             fetch(`https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations/${target}.json`, {
                                 method: 'DELETE'
                             })
@@ -310,7 +319,7 @@
                             });
                         }
                     } else {
-                        alert(`❌ ไม่พบข้อมูลรหัสพนักงาน ${id} ในรอบการอบรมที่เลือก กรุณาตรวจสอบรหัสหรือรอบที่ติ๊กเลือกใหม่อีกครั้งครับ`);
+                        alert(`❌ ไม่พบข้อมูลรหัสพนักงานนี้ในรอบการอบรมที่เลือก กรุณาตรวจสอบรหัสหรือรอบที่ติ๊กเลือกใหม่อีกครั้ง`);
                     }
                 });
         }
