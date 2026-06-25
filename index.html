@@ -20,7 +20,6 @@
         input[type="radio"]:checked + label .radio-circle::after {
             content: ''; display: block; width: 6px; height: 6px; background: white; border-radius: 9999px;
         }
-        
         input[type="radio"].cancel-radio:checked + label {
             border-color: #dc2626;
             background-color: #fef2f2;
@@ -53,7 +52,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                 <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">รหัสพนักงาน</label>
+                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">รหัสพนักงาน (ใช้ตรวจสอบระบบ/ไม่แสดงในตาราง)</label>
                     <input type="text" id="empId" placeholder="กรอกรหัสพนักงาน" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-4 focus:ring-green-500/10 focus:border-green-500 focus:outline-none transition-all">
                 </div>
                 <div>
@@ -186,6 +185,7 @@
     </div>
 
     <script>
+        // เชื่อมต่อไปยัง Firebase ที่แก้ไขสิทธิ์เปิดถาวรเรียบร้อยแล้ว
         const DB_URL = "https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations.json";
         let globalData = {};
 
@@ -245,7 +245,7 @@
 
         function register() {
             if (isAfterDeadline()) {
-                alert('🚨 ขออภัย! ระบบปิดรับลงทะเบียนแล้วเนื่องจากเลยกำหนดเวลา (30 มิ.ย. 2569 เวลา 12.00 น.)');
+                alert('🚨 ขออภัยครับ! ระบบปิดรับลงทะเบียนแล้วเนื่องจากเลยกำหนดเวลา (30 มิ.ย. 2569 เวลา 12.00 น.)');
                 return;
             }
 
@@ -255,7 +255,7 @@
             const round = roundRadio ? roundRadio.value : "1";
 
             if (!id || !name) {
-                alert('⚠️ กรุณากรอกทั้งรหัสพนักงานและชื่อ-นามสกุลให้ครบถ้วน');
+                alert('⚠️ กรุณากรอกทั้งรหัสพนักงานและชื่อ-นามสกุลให้ครบถ้วนครับ');
                 return;
             }
 
@@ -266,7 +266,7 @@
                     const isDuplicate = Object.values(currentData).find(item => item.id === id);
 
                     if (isDuplicate) {
-                        alert(`❌ รหัสพนักงานนี้เคยลงทะเบียนไว้ในระบบแล้ว หากต้องการย้ายรอบกรุณากดลบชื่อที่ช่อง "ยกเลิกการลงทะเบียน" ด้านล่างสุดก่อนค่ะ`);
+                        alert(`❌ รหัสพนักงานนี้เคยลงทะเบียนไว้ในระบบแล้ว หากต้องการย้ายรอบกรุณากดลบชื่อที่ช่อง "ยกเลิกการลงทะเบียน" ด้านล่างสุดก่อนครับ`);
                         return;
                     }
 
@@ -279,7 +279,7 @@
                     if (response) {
                         document.getElementById('empId').value = '';
                         document.getElementById('empName').value = '';
-                        alert('🎉 ฝ่ายออฟฟิศลงทะเบียนเรียบร้อยแล้วค่ะ!');
+                        alert('🎉 ฝ่ายออฟฟิศลงทะเบียนเรียบร้อยแล้วครับ!');
                         fetchDatabase();
                     }
                 })
@@ -297,7 +297,7 @@
             const round = cancelRoundRadio ? cancelRoundRadio.value : "1";
 
             if (!id) {
-                alert('⚠️ กรุณากรอก "รหัสพนักงาน" ในกล่องยกเลิกเพื่อดำเนินการ');
+                alert('⚠️ กรุณากรอก "รหัสพนักงาน" ในกล่องยกเลิกเพื่อดำเนินการครับ');
                 return;
             }
 
@@ -319,7 +319,7 @@
                             });
                         }
                     } else {
-                        alert(`❌ ไม่พบข้อมูลรหัสพนักงานนี้ในรอบการอบรมที่เลือก กรุณาตรวจสอบรหัสหรือรอบที่ติ๊กเลือกใหม่อีกครั้ง`);
+                        alert(`❌ ไม่พบข้อมูลรหัสพนักงานนี้ในรอบการอบรมที่เลือก กรุณาตรวจสอบรหัสหรือรอบที่ติ๊กเลือกใหม่อีกครั้งครับ`);
                     }
                 });
         }
