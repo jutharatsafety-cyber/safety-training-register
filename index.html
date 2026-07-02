@@ -29,34 +29,35 @@
             background-color: #dc2626;
         }
 
-        /* 🖨️ แก้ไขส่วนสไตล์การสั่งพิมพ์ (Print Mode Optimization) */
+        /* 🖨️ ปรับปรุงสไตล์สำหรับสั่งพิมพ์ใหม่ (เรียงจากบนลงล่าง ไม่เบียดกัน) */
         @media print {
-            /* ตั้งค่าหน้ากระดาษและซ่อนส่วนที่ไม่จำเป็น */
             body { background-color: #ffffff; padding: 0; margin: 0; }
             .no-print { display: none !important; }
             
-            /* บังคับให้โครงสร้างตารางขยายตัวตามข้อมูลจริง ไม่บีบอัด */
+            /* 🎯 เปลี่ยนจาก 3 คอลัมน์แนวนอน เป็นเรียงแถวแนวตั้งทีละรอบ */
             .print-layout { 
-                display: grid !important;
-                grid-template-columns: repeat(3, minmax(0, 1fr)) !important; 
-                gap: 1.5rem !important; 
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 2rem !important; 
                 width: 100% !important;
             }
             
             .max-w-7xl { max-w: 100% !important; width: 100% !important; }
 
-            /* ปลดล็อกความสูงและตัวสกロールออก เพื่อให้เห็นรายชื่อยาวลงมาครบทุกคน */
+            /* ปลดล็อกความสูงเพื่อให้เห็นรายชื่อครบทุกคน */
             .print-list-container {
                 max-height: none !important;
                 overflow: visible !important;
             }
 
-            /* ป้องกันการตัดหน้ากระดาษตรงกลางรายชื่อแบบไม่สวยงาม */
+            /* การ์ดแต่ละรอบจะขยายเต็มความกว้างกระดาษ และเว้นระยะสวยงาม */
             .print-card {
+                width: 100% !important;
                 page-break-inside: avoid;
                 break-inside: avoid;
-                border: 1px solid #e2e8f0 !important;
+                border: 1px solid #cbd5e1 !important;
                 box-shadow: none !important;
+                border-radius: 0.75rem !important;
             }
         }
     </style>
@@ -223,9 +224,7 @@
         const DB_URL = "https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations.json";
         let globalData = {};
 
-        function isAfterDeadline() {
-            return false;
-        }
+        function isAfterDeadline() { return false; }
 
         function fetchDatabase() {
             fetch(DB_URL)
