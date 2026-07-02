@@ -29,12 +29,35 @@
             background-color: #dc2626;
         }
 
-        /* สไตล์พิเศษสำหรับเวลาสั่งพิมพ์พิมพ์ (Print Mode) */
+        /* 🖨️ แก้ไขส่วนสไตล์การสั่งพิมพ์ (Print Mode Optimization) */
         @media print {
-            body { background-color: #ffffff; padding: 0; }
+            /* ตั้งค่าหน้ากระดาษและซ่อนส่วนที่ไม่จำเป็น */
+            body { background-color: #ffffff; padding: 0; margin: 0; }
             .no-print { display: none !important; }
-            .print-layout { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 1rem !important; }
+            
+            /* บังคับให้โครงสร้างตารางขยายตัวตามข้อมูลจริง ไม่บีบอัด */
+            .print-layout { 
+                display: grid !important;
+                grid-template-columns: repeat(3, minmax(0, 1fr)) !important; 
+                gap: 1.5rem !important; 
+                width: 100% !important;
+            }
+            
             .max-w-7xl { max-w: 100% !important; width: 100% !important; }
+
+            /* ปลดล็อกความสูงและตัวสกロールออก เพื่อให้เห็นรายชื่อยาวลงมาครบทุกคน */
+            .print-list-container {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+
+            /* ป้องกันการตัดหน้ากระดาษตรงกลางรายชื่อแบบไม่สวยงาม */
+            .print-card {
+                page-break-inside: avoid;
+                break-inside: avoid;
+                border: 1px solid #e2e8f0 !important;
+                box-shadow: none !important;
+            }
         }
     </style>
 </head>
@@ -104,7 +127,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 print-layout">
-            <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between">
+            <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card">
                 <div>
                     <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5">
                         <h3 class="font-bold text-lg">รอบที่ 1</h3>
@@ -114,11 +137,11 @@
                             <span class="bg-white text-blue-700 px-2 py-0.5 rounded-md" id="total-count-1">0 คน</span>
                         </div>
                     </div>
-                    <ul id="list-1" class="p-4 divide-y divide-slate-50 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1"></ul>
+                    <ul id="list-1" class="p-4 divide-y divide-slate-100 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between">
+            <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card">
                 <div>
                     <div class="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white p-5">
                         <h3 class="font-bold text-lg">รอบที่ 2</h3>
@@ -128,11 +151,11 @@
                             <span class="bg-white text-purple-700 px-2 py-0.5 rounded-md" id="total-count-2">0 คน</span>
                         </div>
                     </div>
-                    <ul id="list-2" class="p-4 divide-y divide-slate-50 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1"></ul>
+                    <ul id="list-2" class="p-4 divide-y divide-slate-100 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
                 </div>
             </div>
 
-            <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between">
+            <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card">
                 <div>
                     <div class="bg-gradient-to-r from-indigo-600 to-cyan-600 text-white p-5">
                         <h3 class="font-bold text-lg">รอบที่ 3</h3>
@@ -142,7 +165,7 @@
                             <span class="bg-white text-indigo-700 px-2 py-0.5 rounded-md" id="total-count-3">0 คน</span>
                         </div>
                     </div>
-                    <ul id="list-3" class="p-4 divide-y divide-slate-50 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1"></ul>
+                    <ul id="list-3" class="p-4 divide-y divide-slate-100 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
                 </div>
             </div>
         </div>
@@ -236,7 +259,7 @@
                 } else {
                     rounds[i].forEach((emp, index) => {
                         newListHTML += `
-                            <li class="py-3 flex justify-between items-center border-b border-slate-50 last:border-none">
+                            <li class="py-3 flex justify-between items-center border-b border-slate-100 last:border-none">
                                 <div class="flex flex-col">
                                     <span class="font-semibold text-slate-800">${index + 1}. ${emp.name}</span>
                                 </div>
