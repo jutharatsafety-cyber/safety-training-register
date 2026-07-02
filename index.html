@@ -37,9 +37,6 @@
             <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">Safety First</span>
             <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">🚨 ระบบลงทะเบียนอบรมคู่มือความปลอดภัยฯ</h1>
             <p class="text-red-500 text-base sm:text-lg mt-2 max-w-2xl mx-auto font-bold">⚠️ ลงทะเบียนได้เฉพาะฝ่ายออฟฟิศเท่านั้น</p>
-            <div class="mt-4 inline-block bg-amber-50 border border-amber-200 text-amber-800 text-sm sm:text-base font-semibold px-5 py-2.5 rounded-2xl shadow-sm">
-                ⏳ ต้องลงทะเบียนจองวันอบรม ภายในวันที่ <span class="text-red-600 underline font-bold">30 มิถุนายน 2569 เวลา 12.00 น.</span> เท่านั้น
-            </div>
         </div>
 
         <div class="bg-white rounded-2xl shadow-xl shadow-slate-100/50 p-6 sm:p-8 border border-slate-100 mb-12 max-w-4xl mx-auto">
@@ -185,14 +182,12 @@
     </div>
 
     <script>
-        // เชื่อมต่อไปยัง Firebase ที่แก้ไขสิทธิ์เปิดถาวรเรียบร้อยแล้ว
         const DB_URL = "https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations.json";
         let globalData = {};
 
+        // ลบเงื่อนไขการเช็กกำหนดเวลาออก โดยให้ส่งค่ากลับเป็น false เสมอ
         function isAfterDeadline() {
-            const deadline = new Date("2026-06-30T12:00:00+07:00"); 
-            const now = new Date();
-            return now > deadline;
+            return false;
         }
 
         function fetchDatabase() {
@@ -245,7 +240,7 @@
 
         function register() {
             if (isAfterDeadline()) {
-                alert('🚨 ขออภัยครับ! ระบบปิดรับลงทะเบียนแล้วเนื่องจากเลยกำหนดเวลา (30 มิ.ย. 2569 เวลา 12.00 น.)');
+                alert('🚨 ขออภัยครับ! ระบบปิดรับลงทะเบียนแล้วเนื่องจากเลยกำหนดเวลา');
                 return;
             }
 
@@ -288,7 +283,7 @@
 
         function cancelRegister() {
             if (isAfterDeadline()) {
-                alert('🚨 ไม่สามารถยกเลิกรายชื่อได้แล้ว เนื่องจากเลยกำหนดเวลาการจัดการข้อมูล (30 มิ.ย. 2569 เวลา 12.00 น.)');
+                alert('🚨 ไม่สามารถยกเลิกรายชื่อได้แล้ว เนื่องจากเลยกำหนดเวลาการจัดการข้อมูล');
                 return;
             }
 
@@ -328,4 +323,5 @@
         setInterval(fetchDatabase, 3000);
     </script>
 </body>
+</html>
 </html>
