@@ -3,38 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ระบบลงทะเบียนอบรมคู่มือความปลอดภัยฯ</title>
+    <title>สรุปรายชื่อลงทะเบียนอบรมคู่มือความปลอดภัยฯ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Sarabun', sans-serif; background-color: #f8fafc; }
-        input[type="radio"]:checked + label {
-            border-color: #16a34a;
-            background-color: #f0fdf4;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-        }
-        input[type="radio"]:checked + label .radio-circle {
-            border-color: #16a34a;
-            background-color: #16a34a;
-        }
-        input[type="radio"]:checked + label .radio-circle::after {
-            content: ''; display: block; width: 6px; height: 6px; background: white; border-radius: 9999px;
-        }
-        input[type="radio"].cancel-radio:checked + label {
-            border-color: #dc2626;
-            background-color: #fef2f2;
-        }
-        input[type="radio"].cancel-radio:checked + label .radio-circle {
-            border-color: #dc2626;
-            background-color: #dc2626;
-        }
 
-        /* 🖨️ ปรับปรุงสไตล์สำหรับสั่งพิมพ์ใหม่ (เรียงจากบนลงล่าง ไม่เบียดกัน) */
+        /* 🖨️ สไตล์สำหรับสั่งพิมพ์รายงานแนวตั้ง (A4 Layout) */
         @media print {
             body { background-color: #ffffff; padding: 0; margin: 0; }
             .no-print { display: none !important; }
             
-            /* 🎯 เปลี่ยนจาก 3 คอลัมน์แนวนอน เป็นเรียงแถวแนวตั้งทีละรอบ */
+            /* เรียงแถวแนวตั้งทีละรอบเพื่อให้เห็นชื่อเต็ม ไม่เบียดกัน */
             .print-layout { 
                 display: flex !important;
                 flex-direction: column !important;
@@ -44,13 +24,13 @@
             
             .max-w-7xl { max-w: 100% !important; width: 100% !important; }
 
-            /* ปลดล็อกความสูงเพื่อให้เห็นรายชื่อครบทุกคน */
+            /* ปลดล็อกความสูงเพื่อให้แสดงรายชื่อครบทุกคน */
             .print-list-container {
                 max-height: none !important;
                 overflow: visible !important;
             }
 
-            /* การ์ดแต่ละรอบจะขยายเต็มความกว้างกระดาษ และเว้นระยะสวยงาม */
+            /* ขยายการ์ดแต่ละรอบเต็มหน้ากระดาษ */
             .print-card {
                 width: 100% !important;
                 page-break-inside: avoid;
@@ -66,68 +46,19 @@
 
     <div class="max-w-7xl mx-auto">
         <div class="text-center mb-10">
-            <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">Safety First</span>
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">🚨 ระบบลงทะเบียนอบรมคู่มือความปลอดภัยฯ</h1>
+            <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">Safety Report</span>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">📊 สรุปรายชื่อผู้ลงทะเบียนอบรมคู่มือความปลอดภัยฯ</h1>
         </div>
 
-        <div class="bg-white rounded-2xl shadow-xl shadow-slate-100/50 p-6 sm:p-8 border border-slate-100 mb-12 max-w-4xl mx-auto no-print">
-            <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-                <span class="p-2 bg-green-50 text-green-600 rounded-xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                </span>
-                <h2 class="text-xl font-bold text-slate-800">กรอกข้อมูลลงทะเบียน</h2>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">รหัสพนักงาน (ใช้ตรวจสอบระบบ/ไม่แสดงในตาราง)</label>
-                    <input type="text" id="empId" placeholder="กรอกรหัสพนักงาน" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-4 focus:ring-green-500/10 focus:border-green-500 focus:outline-none transition-all">
-                </div>
-                <div>
-                    <label class="block text-sm font-semibold text-slate-700 mb-1.5">ชื่อ - นามสกุล</label>
-                    <input type="text" id="empName" placeholder="ชื่อ - นามสกุล" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-4 focus:ring-green-500/10 focus:border-green-500 focus:outline-none transition-all placeholder:text-slate-300">
-                </div>
-            </div>
-
-            <div class="mb-6">
-                <label class="block text-sm font-semibold text-slate-700 mb-3">เลือกรอบที่ต้องการอบรม (คลิกเลือกช่องที่ต้องการ)</label>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <input type="radio" id="r1" name="regRound" value="1" class="hidden" checked>
-                    <label for="r1" class="flex items-center gap-3 p-3.5 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
-                        <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 1</span><span class="text-xs text-slate-500">ศุกร์ 14 ส.ค. (08:30 - 12:00)</span></div>
-                    </label>
-
-                    <input type="radio" id="r2" name="regRound" value="2" class="hidden">
-                    <label for="r2" class="flex items-center gap-3 p-3.5 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
-                        <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 2</span><span class="text-xs text-slate-500">ศุกร์ 21 ส.ค. (08:30 - 12:00)</span></div>
-                    </label>
-
-                    <input type="radio" id="r3" name="regRound" value="3" class="hidden">
-                    <label for="r3" class="flex items-center gap-3 p-3.5 border-2 border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all">
-                        <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                        <div class="text-sm"><span class="font-bold text-slate-700 block">รอบที่ 3</span><span class="text-xs text-slate-500">ศุกร์ 28 ส.ค. (08:30 - 12:00)</span></div>
-                    </label>
-                </div>
-            </div>
-            <button onclick="register()" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-4 rounded-xl transition duration-200 shadow-lg shadow-green-600/20 active:scale-[0.99] mt-2">
-                ✅ ยืนยันการลงทะเบียนออนไลน์
-            </button>
-        </div>
-
-        <div class="relative my-10 flex flex-col items-center gap-4">
-            <div class="absolute inset-0 flex items-center no-print"><div class="w-full border-t border-slate-200"></div></div>
-            <div class="relative flex justify-center text-sm font-medium no-print">
-                <span class="bg-[#f8fafc] px-4 text-slate-400 font-bold">📊 สรุปรายชื่อที่ลงทะเบียน</span>
-            </div>
-            <button onclick="window.print()" class="no-print bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-6 rounded-xl transition duration-200 shadow-md shadow-blue-600/10 active:scale-[0.99] flex items-center gap-2 text-sm z-10">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
-                🖨️ พิมพ์สรุปรายชื่อลงทะเบียน
+        <div class="flex justify-center mb-10 no-print">
+            <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-xl transition duration-200 shadow-lg shadow-blue-600/20 active:scale-[0.99] flex items-center gap-2 text-base z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
+                🖨️ พิมพ์สรุปรายชื่อลงทะเบียน (A4)
             </button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 print-layout">
+            
             <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card">
                 <div>
                     <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5">
@@ -138,7 +69,7 @@
                             <span class="bg-white text-blue-700 px-2 py-0.5 rounded-md" id="total-count-1">0 คน</span>
                         </div>
                     </div>
-                    <ul id="list-1" class="p-4 divide-y divide-slate-100 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
+                    <ul id="list-1" class="p-4 divide-y divide-slate-100 max-h-[450px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
                 </div>
             </div>
 
@@ -152,7 +83,7 @@
                             <span class="bg-white text-purple-700 px-2 py-0.5 rounded-md" id="total-count-2">0 คน</span>
                         </div>
                     </div>
-                    <ul id="list-2" class="p-4 divide-y divide-slate-100 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
+                    <ul id="list-2" class="p-4 divide-y divide-slate-100 max-h-[450px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
                 </div>
             </div>
 
@@ -166,65 +97,16 @@
                             <span class="bg-white text-indigo-700 px-2 py-0.5 rounded-md" id="total-count-3">0 คน</span>
                         </div>
                     </div>
-                    <ul id="list-3" class="p-4 divide-y divide-slate-100 max-h-[350px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
+                    <ul id="list-3" class="p-4 divide-y divide-slate-100 max-h-[450px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
                 </div>
             </div>
-        </div>
 
-        <div class="no-print">
-            <div class="relative my-10">
-                <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-200"></div></div>
-                <div class="relative flex justify-center text-sm font-medium"><span class="bg-[#f8fafc] px-4 text-red-400 font-bold">⚙️ การจัดการข้อมูล</span></div>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-xl shadow-slate-100/50 p-6 sm:p-8 border border-slate-100 max-w-xl mx-auto mb-10">
-                <div class="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-                    <span class="p-2 bg-red-50 text-red-600 rounded-xl">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-16v1a3 3 0 003 3h10M4 7h16" /></svg>
-                    </span>
-                    <h2 class="text-xl font-bold text-slate-800">ยกเลิกการลงทะเบียน</h2>
-                </div>
-
-                <div class="space-y-5 mb-6">
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1.5">รหัสพนักงานที่ต้องการยกเลิก</label>
-                        <input type="text" id="cancelEmpId" placeholder="กรอกรหัสพนักงานเพื่อยกเลิก" class="w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-4 focus:ring-red-500/10 focus:border-red-500 focus:outline-none transition-all">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-3">เลือกรอบที่ต้องการลบชื่อออก</label>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                            <input type="radio" id="cr1" name="cancelRound" value="1" class="cancel-radio hidden" checked>
-                            <label for="cr1" class="flex items-center gap-2 p-2.5 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all text-center justify-center">
-                                <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                                <span class="text-xs font-medium text-slate-700">รอบ 1 (14 ส.ค.)</span>
-                            </label>
-
-                            <input type="radio" id="cr2" name="cancelRound" value="2" class="cancel-radio hidden">
-                            <label for="cr2" class="flex items-center gap-2 p-2.5 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all text-center justify-center">
-                                <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                                <span class="text-xs font-medium text-slate-700">รอบ 2 (21 ส.ค.)</span>
-                            </label>
-
-                            <input type="radio" id="cr3" name="cancelRound" value="3" class="cancel-radio hidden">
-                            <label for="cr3" class="flex items-center gap-2 p-2.5 border border-slate-100 rounded-xl cursor-pointer hover:bg-slate-50 transition-all text-center justify-center">
-                                <div class="radio-circle w-4 h-4 border border-slate-300 rounded-full flex items-center justify-center flex-shrink-0"></div>
-                                <span class="text-xs font-medium text-slate-700">รอบ 3 (28 ส.ค.)</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <button onclick="cancelRegister()" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-4 rounded-xl transition duration-200 shadow-lg shadow-red-500/20 active:scale-[0.99] mt-2">
-                    ❌ ยืนยันยกเลิกรายชื่อ
-                </button>
-            </div>
         </div>
     </div>
 
     <script>
         const DB_URL = "https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations.json";
         let globalData = {};
-
-        function isAfterDeadline() { return false; }
 
         function fetchDatabase() {
             fetch(DB_URL)
@@ -242,7 +124,7 @@
             Object.keys(globalData).forEach(key => {
                 let item = globalData[key];
                 if (rounds[item.round]) {
-                    rounds[item.round].push({ firebaseKey: key, id: item.id, name: item.name });
+                    rounds[item.round].push({ id: item.id, name: item.name });
                 }
             });
 
@@ -274,87 +156,7 @@
             }
         }
 
-        function register() {
-            if (isAfterDeadline()) {
-                alert('🚨 ขออภัยครับ! ระบบปิดรับลงทะเบียนแล้วเนื่องจากเลยกำหนดเวลา');
-                return;
-            }
-
-            const id = document.getElementById('empId').value.trim();
-            const name = document.getElementById('empName').value.trim();
-            const roundRadio = document.querySelector('input[name="regRound"]:checked');
-            const round = roundRadio ? roundRadio.value : "1";
-
-            if (!id || !name) {
-                alert('⚠️ กรุณากรอกทั้งรหัสพนักงานและชื่อ-นามสกุลให้ครบถ้วนครับ');
-                return;
-            }
-
-            fetch(DB_URL)
-                .then(res => res.json())
-                .then(latestData => {
-                    const currentData = latestData || {};
-                    const isDuplicate = Object.values(currentData).find(item => item.id === id);
-
-                    if (isDuplicate) {
-                        alert(`❌ รหัสพนักงานนี้เคยลงทะเบียนไว้ในระบบแล้ว หากต้องการย้ายรอบกรุณากดลบชื่อที่ช่อง "ยกเลิกการลงทะเบียน" ด้านล่างสุดก่อนครับ`);
-                        return;
-                    }
-
-                    return fetch(DB_URL, {
-                        method: 'POST',
-                        body: JSON.stringify({ id: id, name: name, round: round })
-                    });
-                })
-                .then(response => {
-                    if (response) {
-                        document.getElementById('empId').value = '';
-                        document.getElementById('empName').value = '';
-                        alert('🎉 ลงทะเบียนเรียบร้อยแล้วครับ!');
-                        fetchDatabase();
-                    }
-                })
-                .catch(err => console.error("Error during registration:", err));
-        }
-
-        function cancelRegister() {
-            if (isAfterDeadline()) {
-                alert('🚨 ไม่สามารถยกเลิกรายชื่อได้แล้ว เนื่องจากเลยกำหนดเวลาการจัดการข้อมูล');
-                return;
-            }
-
-            const id = document.getElementById('cancelEmpId').value.trim();
-            const cancelRoundRadio = document.querySelector('input[name="cancelRound"]:checked');
-            const round = cancelRoundRadio ? cancelRoundRadio.value : "1";
-
-            if (!id) {
-                alert('⚠️ กรุณากรอก "รหัสพนักงาน" ในกล่องยกเลิกเพื่อดำเนินการครับ');
-                return;
-            }
-
-            fetch(DB_URL)
-                .then(res => res.json())
-                .then(latestData => {
-                    const currentData = latestData || {};
-                    const target = Object.keys(currentData).find(key => currentData[key].id === id && currentData[key].round === round);
-
-                    if (target) {
-                        if (confirm(`คุณต้องการยกเลิกสิทธิ์รหัสพนักงานนี้ ในรอบที่ ${round} ใช่หรือไม่?`)) {
-                            fetch(`https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations/${target}.json`, {
-                                method: 'DELETE'
-                            })
-                            .then(() => {
-                                document.getElementById('cancelEmpId').value = '';
-                                alert('🗑️ ดำเนินการลบรายชื่อออกจากระบบออนไลน์สำเร็จแล้ว');
-                                fetchDatabase();
-                            });
-                        }
-                    } else {
-                        alert(`❌ ไม่พบข้อมูลรหัสพนักงานนี้ในรอบการอบรมที่เลือก กรุณาตรวจสอบรหัสหรือรอบที่ติ๊กเลือกใหม่อีกครั้งครับ`);
-                    }
-                });
-        }
-
+        // เรียกดึงข้อมูลจาก Firebase อัตโนมัติทุกๆ 3 วินาที เพื่อให้อัปเดตแบบ Realtime
         fetchDatabase();
         setInterval(fetchDatabase, 3000);
     </script>
