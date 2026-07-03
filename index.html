@@ -24,12 +24,6 @@
             
             .max-w-7xl { max-w: 100% !important; width: 100% !important; }
 
-            /* ปลดล็อกความสูงเพื่อให้แสดงรายชื่อครบทุกคน */
-            .print-list-container {
-                max-height: none !important;
-                overflow: visible !important;
-            }
-
             /* ขยายการ์ดแต่ละรอบเต็มหน้ากระดาษ */
             .print-card {
                 width: 100% !important;
@@ -69,7 +63,7 @@
                             <span class="bg-white text-blue-700 px-2 py-0.5 rounded-md" id="total-count-1">0 คน</span>
                         </div>
                     </div>
-                    <ul id="list-1" class="p-4 divide-y divide-slate-100 max-h-[450px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
+                    <ul id="list-1" class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1"></ul>
                 </div>
             </div>
 
@@ -83,7 +77,7 @@
                             <span class="bg-white text-purple-700 px-2 py-0.5 rounded-md" id="total-count-2">0 คน</span>
                         </div>
                     </div>
-                    <ul id="list-2" class="p-4 divide-y divide-slate-100 max-h-[450px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
+                    <ul id="list-2" class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1"></ul>
                 </div>
             </div>
 
@@ -97,7 +91,7 @@
                             <span class="bg-white text-indigo-700 px-2 py-0.5 rounded-md" id="total-count-3">0 คน</span>
                         </div>
                     </div>
-                    <ul id="list-3" class="p-4 divide-y divide-slate-100 max-h-[450px] overflow-y-auto text-sm text-slate-600 space-y-1 print-list-container"></ul>
+                    <ul id="list-3" class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1"></ul>
                 </div>
             </div>
 
@@ -156,7 +150,6 @@
             }
         }
 
-        // เรียกดึงข้อมูลจาก Firebase อัตโนมัติทุกๆ 3 วินาที เพื่อให้อัปเดตแบบ Realtime
         fetchDatabase();
         setInterval(fetchDatabase, 3000);
     </script>
