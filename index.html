@@ -117,19 +117,24 @@
             
             Object.keys(globalData).forEach(key => {
                 let item = globalData[key];
-                
-                // 🛠️ คัดแยกตำแหน่งรอบตามนามสกุล
-                if (item.name) {
-                    if (item.name.includes("มงคล วงค์ใส")) {
-                        item.round = "2"; // มงคล วงค์ใส -> อยู่รอบ 2
-                    } else if (item.name.includes("มงคล เสาเวียง") || item.name.includes("มงคล")) {
-                        item.name = "มงคล เสาเวียง"; 
-                        item.round = "3"; // มงคล เสาเวียง -> อยู่รอบ 3
-                    }
+                let empName = item.name ? item.name.trim() : "";
+                let targetRound = item.round;
+
+                // 🛠️ คัดแยกตำแหน่งรอบแบบเจาะจง
+                if (empName.includes("วงค์ใส")) {
+                    empName = "มงคล วงค์ใส";
+                    targetRound = "2"; // บังคับลงรอบ 2
+                } else if (empName.includes("เสาเวียง")) {
+                    empName = "มงคล เสาเวียง";
+                    targetRound = "3"; // บังคับลงรอบ 3
+                } else if (empName === "มงคล") {
+                    // กรณีในฐานข้อมูลบันทึกแค่คำว่า "มงคล" คำเดียว
+                    empName = "มงคล วงค์ใส";
+                    targetRound = "2";
                 }
 
-                if (rounds[item.round]) {
-                    rounds[item.round].push({ id: item.id, name: item.name });
+                if (rounds[targetRound]) {
+                    rounds[targetRound].push({ id: item.id, name: empName });
                 }
             });
 
