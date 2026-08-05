@@ -118,10 +118,14 @@
             Object.keys(globalData).forEach(key => {
                 let item = globalData[key];
                 
-                // 🛠️ ตรวจสอบหากพบรายชื่อ มงคล ให้ปรับย้ายมาอยู่รอบที่ 3 อัตโนมัติ
-                if (item.name && item.name.includes("มงคล")) {
-                    item.name = "มงคล เสาเวียง";
-                    item.round = "3";
+                // 🛠️ คัดแยกตำแหน่งรอบตามนามสกุล
+                if (item.name) {
+                    if (item.name.includes("มงคล วงค์ใส")) {
+                        item.round = "2"; // มงคล วงค์ใส -> อยู่รอบ 2
+                    } else if (item.name.includes("มงคล เสาเวียง") || item.name.includes("มงคล")) {
+                        item.name = "มงคล เสาเวียง"; 
+                        item.round = "3"; // มงคล เสาเวียง -> อยู่รอบ 3
+                    }
                 }
 
                 if (rounds[item.round]) {
