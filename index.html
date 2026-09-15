@@ -31,6 +31,12 @@
                 border-radius: 0.75rem !important;
             }
             
+            /* ปลดล็อกความสูงเพื่อให้แสดงรายชื่อทั้งหมดตอนสั่งปริ้น */
+            .print-list {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+
             .input-section { display: none !important; }
         }
     </style>
@@ -96,7 +102,7 @@
                                 <p class="text-xs text-slate-200 opacity-90 mt-2 bg-black/10 p-2 rounded-lg">${escapeHtml(group.detail)}</p>
                             </div>
 
-                            <ul class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1 max-h-60 overflow-y-auto" id="list-${group.id}">
+                            <ul class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1 max-h-60 overflow-y-auto print-list" id="list-${group.id}">
                                 <li class="py-6 text-center text-slate-400 italic font-light">กำลังโหลดข้อมูล...</li>
                             </ul>
                         </div>
