@@ -9,7 +9,6 @@
     <style>
         body { font-family: 'Sarabun', sans-serif; background-color: #f8fafc; }
 
-        /* 🖨️ สไตล์สำหรับสั่งพิมพ์รายงานแนวตั้ง (A4 Layout) */
         @media print {
             body { background-color: #ffffff; padding: 0; margin: 0; }
             .no-print { display: none !important; }
@@ -42,11 +41,11 @@
         <!-- Header -->
         <div class="text-center mb-6">
             <span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">CSR Activity</span>
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">🤝 ลงทะเบียนเข้าร่วมกิจกรรม CSR</h1>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">🌱 ลงทะเบียนเข้าร่วมกิจกรรม CSR</h1>
             <p class="text-slate-500 mt-2 text-sm">เลือกกลุ่มที่ต้องการและกรอกชื่อ-นามสกุลเพื่อลงทะเบียน (Real-Time)</p>
         </div>
 
-        <!-- 🚫 ส่วนยกเลิกการลงทะเบียน (เฉพาะหน้าเว็บ ซ่อนเมื่อสั่งพิมพ์) -->
+        <!-- ส่วนยกเลิกการลงทะเบียน -->
         <div class="max-w-md mx-auto mb-8 bg-white p-4 rounded-2xl shadow-sm border border-slate-200 no-print">
             <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 text-center">❌ ยกเลิกการลงทะเบียน</h3>
             <div class="flex gap-2">
@@ -78,25 +77,30 @@
         const DB_URL = `${BASE_URL}.json`;
 
         const GROUPS_CONFIG = [
-            { id: 1, name: "บ้านเด็กชาย", leader: "คุณวรวุฒิ เรืองฤดี", max: 20, detail: "1. นำตาข่ายล้อมรอบบริเวณหลังคาด้านบน 2. ทำความสะอาดเรือนนอนชายทั้ง 2 ฝั่ง" },
-            { id: 2, name: "ห้องน้ำเด็กชาย", leader: "คุณกิรติพงษ์ นาคุณ", max: 16, detail: "1. ทำความสะอาดห้องน้ำ 2. ทาสี" },
-            { id: 3, name: "ห้องพยาบาล และศาลา", leader: "คุณอรรถพล บุษภาค", max: 6, detail: "1. ทาสีศาลา 2. ทาสีรั้วด้านนอกห้องพยาบาล" },
+            { id: 1, name: "บ้านเด็กชาย", leader: "คุณวรวุฒิ เรืองยิ่ง", max: 20, detail: "1. นำตาข่ายล้อมรอบบริเวณหลังคาด้านบน 2. ทำความสะอาดเรือนนอนชายทั้ง 2 ฝั่ง" },
+            { id: 2, name: "ห้องน้ำเด็กชาย", leader: "คุณกิรติพงษ์ มหาคุณ", max: 16, detail: "1. ทำความสะอาดห้องน้ำ 2. ทาสี" },
+            { id: 3, name: "ห้องพยาบาล และ ศาลา", leader: "คุณอรรถพล ปูษณาค", max: 6, detail: "1. ทาสีศาลา 2. ทาสีรั้วด้านนอกห้องพยาบาล" },
             { id: 4, name: "เปลี่ยนสแลน / ติดตั้งพัดลม / เปลี่ยนตาข่ายโกลฟุตบอล", leader: "คุณมงคล เสาเวียง", max: 3, detail: "1. เปลี่ยนสแลนบริเวณประตูหลัง 2. เปลี่ยนตาข่ายโกลฟุตบอลหน้าเรือนนอนหญิง 3. ติดตั้งพัดลมบริเวณหน้าห้องน้ำชาย" },
             { id: 5, name: "บันไดทางขึ้นเรือนนอนหญิง / ประตูเล้าไก่ / ประตูห้องน้ำหญิง", leader: "คุณวสันต์ ทองปลิว", max: 6, detail: "1. ซ่อมบันไดทางขึ้นเรือนนอนหญิง 2. ติดตั้งประตูเล้าไก่ใหม่ 3. ติดลูกบิดห้องน้ำหญิงใหม่ 4. ซ่อมกรอบประตูห้องน้ำหญิง" },
             { id: 6, name: "ติดตั้งป้ายมูลนิธิ / ทาสีหน้าทางเข้า", leader: "คุณพัชราภรณ์ แก้วกัญญา", max: 2, detail: "1. ติดตั้งป้ายมูลนิธิใหม่ 2. ทาสีบริเวณปูนด้านหน้า" },
-            { id: 7, name: "ระบบไฟ", leader: "คุณสุวิทย์ พรมเวียง", max: 2, detail: "ซ่อมไฟสำนักงาน, ซ่อมไฟห้องพยาบาล, ซ่อมไฟห้องน้ำครู, ซ่อมไฟห้องน้ำชาย และซ่อมไฟเรือนนอนชาย" },
-            { id: 8, name: "กิจกรรมสันทนาการ", leader: "💓", max: 3, detail: "พาน้องๆ ร้องเพลง และทำกิจกรรมสนุกสนาม" }
+            { id: 7, name: "ระบบไฟ", leader: "คุณสุวิทย์ พรมเวียง", max: 3, detail: "ซ่อมไฟสำนักงาน, ซ่อมไฟห้องพยาบาล, ซ่อมไฟทางเดิน และไฟด้านหลังห้องพยาบาล" },
+            { id: 8, name: "กิจกรรมสันทนาการ", leader: "จอย, ฟี, หมี", max: 3, detail: "พาน้องๆ ร้องเพลง และทำกิจกรรมสนุกสนาม" }
         ];
 
         let globalData = {};
         let registeredNamesList = [];
+        let isInitialRender = true;
 
         function fetchDatabase() {
             fetch(DB_URL)
                 .then(res => res.json())
                 .then(data => {
-                    globalData = data || {};
-                    renderUI();
+                    const newData = data || {};
+                    // เช็คว่าข้อมูลเปลี่ยนไปไหม ถ้าไม่เปลี่ยน ไม่ต้องวาดหน้าจอใหม่
+                    if (JSON.stringify(newData) !== JSON.stringify(globalData)) {
+                        globalData = newData;
+                        renderUI();
+                    }
                 })
                 .catch(err => console.error("Error fetching data:", err));
         }
@@ -117,60 +121,84 @@
                 }
             });
 
-            let htmlContent = '';
+            // สร้างการ์ดครั้งแรก
+            if (isInitialRender) {
+                let htmlContent = '';
+                GROUPS_CONFIG.forEach(group => {
+                    htmlContent += `
+                        <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card" id="card-${group.id}">
+                            <div>
+                                <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-5" id="header-${group.id}">
+                                    <div class="flex justify-between items-start">
+                                        <h3 class="font-bold text-lg">กลุ่มที่ ${group.id}: ${escapeHtml(group.name)}</h3>
+                                        <span class="text-xs bg-emerald-800 text-white px-2.5 py-1 rounded-full font-semibold whitespace-nowrap" id="status-${group.id}">
+                                            0/${group.max}
+                                        </span>
+                                    </div>
+                                    <p class="text-xs text-emerald-100 font-medium mt-1">👑 นำทีมโดย: ${escapeHtml(group.leader)}</p>
+                                    <p class="text-xs text-slate-200 opacity-90 mt-2 bg-black/10 p-2 rounded-lg">${escapeHtml(group.detail)}</p>
+                                </div>
 
+                                <ul class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1 max-h-60 overflow-y-auto" id="list-${group.id}">
+                                </ul>
+                            </div>
+
+                            <div class="p-4 bg-slate-50 border-t border-slate-100 input-section">
+                                <div class="flex gap-2">
+                                    <input type="text" id="input-${group.id}" 
+                                        placeholder="กรอกชื่อ-นามสกุล" 
+                                        class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:bg-slate-200 disabled:cursor-not-allowed">
+                                    <button onclick="register(${group.id})" id="btn-${group.id}"
+                                        class="bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-semibold text-sm px-4 py-2 rounded-lg transition duration-150 whitespace-nowrap disabled:cursor-not-allowed">
+                                        ลงชื่อ
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = htmlContent;
+                isInitialRender = false;
+            }
+
+            // อัปเดตเฉพาะข้อมูลรายชื่อและสถานะเต็ม โดยไม่ทับช่อง Input
             GROUPS_CONFIG.forEach(group => {
                 const members = groupedMembers[group.id] || [];
                 const count = members.length;
                 const isFull = count >= group.max;
 
-                htmlContent += `
-                    <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card">
-                        <div>
-                            <div class="bg-gradient-to-r ${isFull ? 'from-slate-600 to-slate-700' : 'from-emerald-600 to-teal-600'} text-white p-5">
-                                <div class="flex justify-between items-start">
-                                    <h3 class="font-bold text-lg">กลุ่มที่ ${group.id}: ${escapeHtml(group.name)}</h3>
-                                    <span class="text-xs ${isFull ? 'bg-red-500' : 'bg-emerald-800'} text-white px-2.5 py-1 rounded-full font-semibold whitespace-nowrap">
-                                        ${count}/${group.max} ${isFull ? '(เต็ม)' : ''}
-                                    </span>
-                                </div>
-                                <p class="text-xs text-emerald-100 font-medium mt-1">👑 นำทีมโดย: ${escapeHtml(group.leader)}</p>
-                                <p class="text-xs text-slate-200 opacity-90 mt-2 bg-black/10 p-2 rounded-lg">${escapeHtml(group.detail)}</p>
-                            </div>
+                const headerEl = document.getElementById(`header-${group.id}`);
+                const statusEl = document.getElementById(`status-${group.id}`);
+                const listEl = document.getElementById(`list-${group.id}`);
+                const inputEl = document.getElementById(`input-${group.id}`);
+                const btnEl = document.getElementById(`btn-${group.id}`);
 
-                            <ul class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1 max-h-60 overflow-y-auto">
-                                ${members.length === 0 
-                                    ? `<li class="py-6 text-center text-slate-400 italic font-light">ยังไม่มีผู้ลงทะเบียน</li>`
-                                    : members.map((m, idx) => `
-                                        <li class="py-2.5 flex justify-between items-center border-b border-slate-100 last:border-none">
-                                            <span class="font-semibold text-slate-800">${idx + 1}. ${escapeHtml(m.name)}</span>
-                                            <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-medium">ลำดับที่ ${idx + 1}</span>
-                                        </li>
-                                    `).join('')
-                                }
-                            </ul>
-                        </div>
+                // อัปเดตสี Header & Status
+                if (isFull) {
+                    headerEl.className = "bg-gradient-to-r from-slate-600 to-slate-700 text-white p-5";
+                    statusEl.className = "text-xs bg-red-500 text-white px-2.5 py-1 rounded-full font-semibold whitespace-nowrap";
+                    statusEl.innerText = `${count}/${group.max} (เต็ม)`;
+                } else {
+                    headerEl.className = "bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-5";
+                    statusEl.className = "text-xs bg-emerald-800 text-white px-2.5 py-1 rounded-full font-semibold whitespace-nowrap";
+                    statusEl.innerText = `${count}/${group.max}`;
+                }
 
-                        <div class="p-4 bg-slate-50 border-t border-slate-100 input-section">
-                            <div class="flex gap-2">
-                                <input type="text" id="input-${group.id}" 
-                                    placeholder="${isFull ? 'กลุ่มนี้เต็มแล้ว' : 'กรอกชื่อ-นามสกุล'}" 
-                                    ${isFull ? 'disabled' : ''} 
-                                    class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:bg-slate-200 disabled:cursor-not-allowed">
-                                <button onclick="register(${group.id})" 
-                                    ${isFull ? 'disabled' : ''} 
-                                    class="bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-semibold text-sm px-4 py-2 rounded-lg transition duration-150 whitespace-nowrap disabled:cursor-not-allowed">
-                                    ลงชื่อ
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
+                // อัปเดตสถานะการป้อนข้อมูล
+                inputEl.disabled = isFull;
+                btnEl.disabled = isFull;
+                inputEl.placeholder = isFull ? "กลุ่มนี้เต็มแล้ว" : "กรอกชื่อ-นามสกุล";
+
+                // อัปเดตเฉพาะรายการคนลงชื่อ
+                listEl.innerHTML = members.length === 0 
+                    ? `<li class="py-6 text-center text-slate-400 italic font-light">ยังไม่มีผู้ลงทะเบียน</li>`
+                    : members.map((m, idx) => `
+                        <li class="py-2.5 flex justify-between items-center border-b border-slate-100 last:border-none">
+                            <span class="font-semibold text-slate-800">${idx + 1}. ${escapeHtml(m.name)}</span>
+                            <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-medium">ลำดับที่ ${idx + 1}</span>
+                        </li>
+                    `).join('');
             });
-
-            if (container.innerHTML !== htmlContent) {
-                container.innerHTML = htmlContent;
-            }
         }
 
         // ➕ ฟังก์ชันบันทึกข้อมูล
@@ -219,7 +247,6 @@
                 return;
             }
 
-            // ค้นหา Key ของชื่อที่ต้องการลบใน globalData
             let targetKey = null;
             let targetGroupName = "";
 
@@ -236,7 +263,6 @@
                 return;
             }
 
-            // ยืนยันก่อนลบ
             if (confirm(`คุณต้องการยกเลิกการลงทะเบียนของ "${targetName}" จาก${targetGroupName} ใช่หรือไม่?`)) {
                 fetch(`${BASE_URL}/${targetKey}.json`, {
                     method: "DELETE"
