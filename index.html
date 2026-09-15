@@ -41,21 +41,8 @@
         <!-- Header -->
         <div class="text-center mb-6">
             <span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">CSR Activity</span>
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">🌱 ลงทะเบียนเข้าร่วมกิจกรรม CSR</h1>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">🤝 ลงทะเบียนเข้าร่วมกิจกรรม CSR</h1>
             <p class="text-slate-500 mt-2 text-sm">เลือกกลุ่มที่ต้องการและกรอกชื่อ-นามสกุลเพื่อลงทะเบียน (Real-Time)</p>
-        </div>
-
-        <!-- ส่วนยกเลิกการลงทะเบียน -->
-        <div class="max-w-md mx-auto mb-8 bg-white p-4 rounded-2xl shadow-sm border border-slate-200 no-print">
-            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 text-center">❌ ยกเลิกการลงทะเบียน</h3>
-            <div class="flex gap-2">
-                <input type="text" id="cancel-name-input" placeholder="กรอกชื่อ-นามสกุล ที่ต้องการยกเลิก" 
-                    class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500">
-                <button onclick="cancelRegistration()" 
-                    class="bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm px-4 py-2 rounded-lg transition duration-150 whitespace-nowrap shadow-sm shadow-rose-600/20">
-                    ยกเลิก
-                </button>
-            </div>
         </div>
 
         <!-- Print Button -->
@@ -67,8 +54,23 @@
         </div>
 
         <!-- Cards Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 print-layout" id="groups-container">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 print-layout" id="groups-container">
             <!-- Dynamic Cards Rendered by JS -->
+        </div>
+
+        <!-- ❌ ส่วนยกเลิกการลงทะเบียน (ย้ายมาไว้ด้านล่างสุด) -->
+        <div class="max-w-md mx-auto my-10 bg-white p-5 rounded-2xl shadow-sm border border-slate-200 no-print">
+            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 text-center flex items-center justify-center gap-1">
+                <span>❌</span> ยกเลิกการลงทะเบียน
+            </h3>
+            <div class="flex gap-2">
+                <input type="text" id="cancel-name-input" placeholder="กรอกชื่อ-นามสกุล ที่ต้องการยกเลิก" 
+                    class="w-full text-sm px-3.5 py-2.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500">
+                <button onclick="cancelRegistration()" 
+                    class="bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition duration-150 whitespace-nowrap shadow-sm shadow-rose-600/20">
+                    ยกเลิก
+                </button>
+            </div>
         </div>
     </div>
 
@@ -77,12 +79,12 @@
         const DB_URL = `${BASE_URL}.json`;
 
         const GROUPS_CONFIG = [
-            { id: 1, name: "บ้านเด็กชาย", leader: "คุณวรวุฒิ เรืองยิ่ง", max: 20, detail: "1. นำตาข่ายล้อมรอบบริเวณหลังคาด้านบน 2. ทำความสะอาดเรือนนอนชายทั้ง 2 ฝั่ง" },
-            { id: 2, name: "ห้องน้ำเด็กชาย", leader: "คุณกิรติพงษ์ มหาคุณ", max: 16, detail: "1. ทำความสะอาดห้องน้ำ 2. ทาสี" },
-            { id: 3, name: "ห้องพยาบาล และ ศาลา", leader: "คุณอรรถพล ปูษณาค", max: 6, detail: "1. ทาสีศาลา 2. ทาสีรั้วด้านนอกห้องพยาบาล" },
+            { id: 1, name: "บ้านเด็กชาย", leader: "คุณวรวุฒิ เรืองฤดี", max: 20, detail: "1. นำตาข่ายล้อมรอบบริเวณหลังคาด้านบน 2. ทำความสะอาดเรือนนอนชายทั้ง 2 ฝั่ง" },
+            { id: 2, name: "ห้องน้ำเด็กชาย", leader: "คุณกิรติพงษ์ นาคุณ", max: 16, detail: "1. ทำความสะอาดห้องน้ำ 2. ทาสี" },
+            { id: 3, name: "ห้องพยาบาล และ ศาลา", leader: "คุณอรรถพล บุษภาค", max: 6, detail: "1. ทาสีศาลา 2. ทาสีรั้วด้านนอกห้องพยาบาล" },
             { id: 4, name: "เปลี่ยนสแลน / ติดตั้งพัดลม / เปลี่ยนตาข่ายโกลฟุตบอล", leader: "คุณมงคล เสาเวียง", max: 3, detail: "1. เปลี่ยนสแลนบริเวณประตูหลัง 2. เปลี่ยนตาข่ายโกลฟุตบอลหน้าเรือนนอนหญิง 3. ติดตั้งพัดลมบริเวณหน้าห้องน้ำชาย" },
             { id: 5, name: "บันไดทางขึ้นเรือนนอนหญิง / ประตูเล้าไก่ / ประตูห้องน้ำหญิง", leader: "คุณวสันต์ ทองปลิว", max: 6, detail: "1. ซ่อมบันไดทางขึ้นเรือนนอนหญิง 2. ติดตั้งประตูเล้าไก่ใหม่ 3. ติดลูกบิดห้องน้ำหญิงใหม่ 4. ซ่อมกรอบประตูห้องน้ำหญิง" },
-            { id: 6, name: "ติดตั้งป้ายมูลนิธิ / ทาสีหน้าทางเข้า", leader: "คุณพัชราภรณ์ แก้วกัญญา", max: 2, detail: "1. ติดตั้งป้ายมูลนิธิใหม่ 2. ทาสีบริเวณปูนด้านหน้า" },
+            { id: 6, name: "ติดตั้งป้ายมูลนิธิ", leader: "คุณพัชราภรณ์ แก้วกัญญา", max: 2, detail: "ติดตั้งป้ายมูลนิธิใหม่" },
             { id: 7, name: "ระบบไฟ", leader: "คุณสุวิทย์ พรมเวียง", max: 3, detail: "ซ่อมไฟสำนักงาน, ซ่อมไฟห้องพยาบาล, ซ่อมไฟทางเดิน และไฟด้านหลังห้องพยาบาล" },
             { id: 8, name: "กิจกรรมสันทนาการ", leader: "💖", max: 3, detail: "พาน้องๆ ร้องเพลง และทำกิจกรรมสนุกสนาม" }
         ];
@@ -90,7 +92,6 @@
         let globalData = {};
         let registeredNamesList = [];
 
-        // 1. สร้าง โครงสร้างการ์ด (Cards Outline) ทันทีที่โหลดหน้าเว็บ
         function initCards() {
             const container = document.getElementById('groups-container');
             let htmlContent = '';
@@ -132,7 +133,6 @@
             container.innerHTML = htmlContent;
         }
 
-        // 2. ดึงข้อมูลจาก Firebase
         function fetchDatabase() {
             fetch(DB_URL)
                 .then(res => res.json())
@@ -143,7 +143,6 @@
                 .catch(err => console.error("Error fetching data:", err));
         }
 
-        // 3. อัปเดตเฉพาะเนื้อหารายชื่อและสถานะ
         function updateUI() {
             registeredNamesList = [];
             let groupedMembers = {};
@@ -196,7 +195,6 @@
             });
         }
 
-        // ➕ ลงทะเบียน
         function register(groupId) {
             const inputElement = document.getElementById(`input-${groupId}`);
             const name = inputElement.value.trim();
@@ -232,7 +230,6 @@
             });
         }
 
-        // 🗑️ ยกเลิกการลงทะเบียน
         function cancelRegistration() {
             const inputElement = document.getElementById('cancel-name-input');
             const targetName = inputElement.value.trim();
@@ -280,7 +277,6 @@
             });
         }
 
-        // เริ่มทำงาน
         initCards();
         fetchDatabase();
         setInterval(fetchDatabase, 3000);
