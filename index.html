@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สรุปรายชื่อลงทะเบียนอบรมคู่มือความปลอดภัยฯ</title>
+    <title>ลงทะเบียนกิจกรรม CSR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -14,17 +14,15 @@
             body { background-color: #ffffff; padding: 0; margin: 0; }
             .no-print { display: none !important; }
             
-            /* เรียงแถวแนวตั้งทีละรอบเพื่อให้เห็นชื่อเต็ม ไม่เบียดกัน */
             .print-layout { 
                 display: flex !important;
                 flex-direction: column !important;
-                gap: 2rem !important; 
+                gap: 1.5rem !important; 
                 width: 100% !important;
             }
             
-            .max-w-7xl { max-w: 100% !important; width: 100% !important; }
+            .max-w-7xl { max-width: 100% !important; width: 100% !important; }
 
-            /* ขยายการ์ดแต่ละรอบเต็มหน้ากระดาษ */
             .print-card {
                 width: 100% !important;
                 page-break-inside: avoid;
@@ -33,74 +31,53 @@
                 box-shadow: none !important;
                 border-radius: 0.75rem !important;
             }
+            
+            .input-section { display: none !important; }
         }
     </style>
 </head>
 <body class="min-h-screen py-10 px-4 sm:px-6 lg:px-8">
 
     <div class="max-w-7xl mx-auto">
-        <div class="text-center mb-10">
-            <span class="bg-blue-50 text-blue-700 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">Safety Report</span>
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">📊 สรุปรายชื่อผู้ลงทะเบียนอบรมคู่มือความปลอดภัยฯ</h1>
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">CSR Activity</span>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">🌱 ลงทะเบียนเข้าร่วมกิจกรรม CSR</h1>
+            <p class="text-slate-500 mt-2 text-sm">เลือกกลุ่มที่ต้องการและกรอกชื่อ-นามสกุลเพื่อลงทะเบียน (Real-Time)</p>
         </div>
 
+        <!-- Print Button -->
         <div class="flex justify-center mb-10 no-print">
-            <button onclick="window.print()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-xl transition duration-200 shadow-lg shadow-blue-600/20 active:scale-[0.99] flex items-center gap-2 text-base z-10">
+            <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-8 rounded-xl transition duration-200 shadow-lg shadow-emerald-600/20 active:scale-[0.99] flex items-center gap-2 text-base z-10">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
                 🖨️ พิมพ์สรุปรายชื่อลงทะเบียน (A4)
             </button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 print-layout">
-            
-            <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card">
-                <div>
-                    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-5">
-                        <h3 class="font-bold text-lg">รอบที่ 1</h3>
-                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 14 ส.ค. 2569 (08:00 - 12:00)</p>
-                        <div class="mt-3 flex justify-between items-center bg-black/10 rounded-xl px-3 py-1.5 text-xs font-semibold">
-                            <span>ผู้ลงทะเบียนทั้งหมด:</span>
-                            <span class="bg-white text-blue-700 px-2 py-0.5 rounded-md" id="total-count-1">0 คน</span>
-                        </div>
-                    </div>
-                    <ul id="list-1" class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1"></ul>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card">
-                <div>
-                    <div class="bg-gradient-to-r from-purple-600 to-fuchsia-600 text-white p-5">
-                        <h3 class="font-bold text-lg">รอบที่ 2</h3>
-                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 21 ส.ค. 2569 (08:00 - 12:00)</p>
-                        <div class="mt-3 flex justify-between items-center bg-black/10 rounded-xl px-3 py-1.5 text-xs font-semibold">
-                            <span>ผู้ลงทะเบียนทั้งหมด:</span>
-                            <span class="bg-white text-purple-700 px-2 py-0.5 rounded-md" id="total-count-2">0 คน</span>
-                        </div>
-                    </div>
-                    <ul id="list-2" class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1"></ul>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card">
-                <div>
-                    <div class="bg-gradient-to-r from-indigo-600 to-cyan-600 text-white p-5">
-                        <h3 class="font-bold text-lg">รอบที่ 3</h3>
-                        <p class="text-xs opacity-80 mt-0.5">วันศุกร์ที่ 28 ส.ค. 2569 (08:00 - 12:00)</p>
-                        <div class="mt-3 flex justify-between items-center bg-black/10 rounded-xl px-3 py-1.5 text-xs font-semibold">
-                            <span>ผู้ลงทะเบียนทั้งหมด:</span>
-                            <span class="bg-white text-indigo-700 px-2 py-0.5 rounded-md" id="total-count-3">0 คน</span>
-                        </div>
-                    </div>
-                    <ul id="list-3" class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1"></ul>
-                </div>
-            </div>
-
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 print-layout" id="groups-container">
+            <!-- Render JS Dynamic Cards -->
         </div>
     </div>
 
     <script>
-        const DB_URL = "https://safety-training-ce6df-default-rtdb.firebaseio.com/registrations.json";
+        // 🔗 ดึงข้อมูลจากฐานข้อมูล Firebase เดียวกับโค้ดของคุณ
+        const DB_URL = "https://safety-training-ce6df-default-rtdb.firebaseio.com/csr_registrations.json";
+
+        // 📋 โครงสร้างกลุ่มทั้ง 8 กลุ่มตามเอกสาร
+        const GROUPS_CONFIG = [
+            { id: 1, name: "บ้านเด็กชาย", leader: "คุณวรวุฒิ เรืองยิ่ง", max: 20, detail: "1. นำตาข่ายล้อมรอบบริเวณหลังคาด้านบน 2. ทำความสะอาดเรือนนอนชายทั้ง 2 ฝั่ง" },
+            { id: 2, name: "ห้องน้ำเด็กชาย", leader: "คุณกิรติพงษ์ มหาคุณ", max: 16, detail: "1. ทำความสะอาดห้องน้ำ 2. ทาสี" },
+            { id: 3, name: "ห้องพยาบาล และ ศาลา", leader: "คุณอรรถพล ปูษณาค", max: 6, detail: "1. ทาสีศาลา 2. ทาสีรั้วด้านนอกห้องพยาบาล" },
+            { id: 4, name: "เปลี่ยนสแลน / ติดตั้งพัดลม / เปลี่ยนตาข่ายโกลฟุตบอล", leader: "คุณมงคล เสาเวียง", max: 3, detail: "1. เปลี่ยนสแลนบริเวณประตูหลัง 2. เปลี่ยนตาข่ายโกลฟุตบอลหน้าเรือนนอนหญิง 3. ติดตั้งพัดลมบริเวณหน้าห้องน้ำชาย" },
+            { id: 5, name: "บันไดทางขึ้นเรือนนอนหญิง / ประตูเล้าไก่ / ประตูห้องน้ำหญิง", leader: "คุณวสันต์ ทองปลิว", max: 6, detail: "1. ซ่อมบันไดทางขึ้นเรือนนอนหญิง 2. ติดตั้งประตูเล้าไก่ใหม่ 3. ติดลูกบิดห้องน้ำหญิงใหม่ 4. ซ่อมกรอบประตูห้องน้ำหญิง" },
+            { id: 6, name: "ติดตั้งป้ายมูลนิธิ / ทาสีหน้าทางเข้า", leader: "คุณพัชราภรณ์ แก้วกัญญา", max: 2, detail: "1. ติดตั้งป้ายมูลนิธิใหม่ 2. ทาสีบริเวณปูนด้านหน้า" },
+            { id: 7, name: "ระบบไฟ", leader: "คุณสุวิทย์ พรมเวียง", max: 3, detail: "ซ่อมไฟสำนักงาน, ซ่อมไฟห้องพยาบาล, ซ่อมไฟทางเดิน และไฟด้านหลังห้องพยาบาล" },
+            { id: 8, name: "กิจกรรมสันทนาการ", leader: "จอย, ฟี, หมี", max: 3, detail: "พาน้องๆ ร้องเพลง และทำกิจกรรมสนุกสนาม" }
+        ];
+
         let globalData = {};
+        let registeredNamesList = [];
 
         function fetchDatabase() {
             fetch(DB_URL)
@@ -113,59 +90,126 @@
         }
 
         function renderUI() {
-            let rounds = { 1: [], 2: [], 3: [] };
-            
+            const container = document.getElementById('groups-container');
+            registeredNamesList = []; // รีเซ็ตรายชื่อเพื่อเช็คซ้ำ
+
+            // จัดกลุ่มรายชื่อจาก Firebase
+            let groupedMembers = {};
+            GROUPS_CONFIG.forEach(g => groupedMembers[g.id] = []);
+
             Object.keys(globalData).forEach(key => {
                 let item = globalData[key];
-                let empName = item.name ? item.name.trim() : "";
-                let targetRound = item.round;
-
-                // 🛠️ คัดแยกตำแหน่งรอบแบบเจาะจง
-                if (empName.includes("วงค์ใส")) {
-                    empName = "มงคล วงค์ใส";
-                    targetRound = "2"; // บังคับลงรอบ 2
-                } else if (empName.includes("เสาเวียง")) {
-                    empName = "มงคล เสาเวียง";
-                    targetRound = "3"; // บังคับลงรอบ 3
-                } else if (empName === "มงคล") {
-                    // กรณีในฐานข้อมูลบันทึกแค่คำว่า "มงคล" คำเดียว
-                    empName = "มงคล วงค์ใส";
-                    targetRound = "2";
-                }
-
-                if (rounds[targetRound]) {
-                    rounds[targetRound].push({ id: item.id, name: empName });
+                if (item && item.groupId && item.name) {
+                    let nameClean = item.name.trim();
+                    groupedMembers[item.groupId].push({ id: key, name: nameClean });
+                    registeredNamesList.push(nameClean.toLowerCase());
                 }
             });
 
-            for (let i = 1; i <= 3; i++) {
-                const listElement = document.getElementById(`list-${i}`);
-                const totalCountElement = document.getElementById(`total-count-${i}`);
-                
-                totalCountElement.innerText = `${rounds[i].length} คน`;
+            let htmlContent = '';
 
-                let newListHTML = '';
-                if (rounds[i].length === 0) {
-                    newListHTML = `<li class="py-8 text-center text-slate-400 italic font-light">ยังไม่มีผู้ลงทะเบียน</li>`;
-                } else {
-                    rounds[i].forEach((emp, index) => {
-                        newListHTML += `
-                            <li class="py-3 flex justify-between items-center border-b border-slate-100 last:border-none">
-                                <div class="flex flex-col">
-                                    <span class="font-semibold text-slate-800">${index + 1}. ${emp.name}</span>
+            GROUPS_CONFIG.forEach(group => {
+                const members = groupedMembers[group.id] || [];
+                const count = members.length;
+                const isFull = count >= group.max;
+
+                htmlContent += `
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card">
+                        <div>
+                            <!-- Card Header -->
+                            <div class="bg-gradient-to-r ${isFull ? 'from-slate-600 to-slate-700' : 'from-emerald-600 to-teal-600'} text-white p-5">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">กลุ่มที่ ${group.id}: ${escapeHtml(group.name)}</h3>
+                                    <span class="text-xs ${isFull ? 'bg-red-500' : 'bg-emerald-800'} text-white px-2.5 py-1 rounded-full font-semibold whitespace-nowrap">
+                                        ${count}/${group.max} ${isFull ? '(เต็ม)' : ''}
+                                    </span>
                                 </div>
-                                <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-medium">ลำดับที่ ${index + 1}</span>
-                            </li>
-                        `;
-                    });
-                }
+                                <p class="text-xs text-emerald-100 font-medium mt-1">👑 นำทีมโดย: ${escapeHtml(group.leader)}</p>
+                                <p class="text-xs text-slate-200 opacity-90 mt-2 bg-black/10 p-2 rounded-lg">${escapeHtml(group.detail)}</p>
+                            </div>
 
-                if (listElement.innerHTML !== newListHTML) {
-                    listElement.innerHTML = newListHTML;
-                }
+                            <!-- List Section -->
+                            <ul class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1 max-h-60 overflow-y-auto">
+                                ${members.length === 0 
+                                    ? `<li class="py-6 text-center text-slate-400 italic font-light">ยังไม่มีผู้ลงทะเบียน</li>`
+                                    : members.map((m, idx) => `
+                                        <li class="py-2.5 flex justify-between items-center border-b border-slate-100 last:border-none">
+                                            <span class="font-semibold text-slate-800">${idx + 1}. ${escapeHtml(m.name)}</span>
+                                            <span class="text-[10px] bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-medium">ลำดับที่ ${idx + 1}</span>
+                                        </li>
+                                    `).join('')
+                                }
+                            </ul>
+                        </div>
+
+                        <!-- Form Input Section -->
+                        <div class="p-4 bg-slate-50 border-t border-slate-100 input-section">
+                            <div class="flex gap-2">
+                                <input type="text" id="input-${group.id}" 
+                                    placeholder="${isFull ? 'กลุ่มนี้เต็มแล้ว' : 'กรอกชื่อ-นามสกุล'}" 
+                                    ${isFull ? 'disabled' : ''} 
+                                    class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:bg-slate-200 disabled:cursor-not-allowed">
+                                <button onclick="register(${group.id})" 
+                                    ${isFull ? 'disabled' : ''} 
+                                    class="bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-semibold text-sm px-4 py-2 rounded-lg transition duration-150 whitespace-nowrap disabled:cursor-not-allowed">
+                                    ลงชื่อ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (container.innerHTML !== htmlContent) {
+                container.innerHTML = htmlContent;
             }
         }
 
+        // ➕ ฟังก์ชันบันทึกข้อมูลไปยัง Firebase Realtime Database
+        function register(groupId) {
+            const inputElement = document.getElementById(`input-${groupId}`);
+            const name = inputElement.value.trim();
+            const group = GROUPS_CONFIG.find(g => g.id === groupId);
+
+            if (!name) {
+                alert("กรุณากรอกชื่อ-นามสกุลก่อนลงทะเบียน");
+                return;
+            }
+
+            // 🚫 ตรวจสอบการลงชื่อซ้ำ
+            if (registeredNamesList.includes(name.toLowerCase())) {
+                alert(`คุณ "${name}" ได้ลงชื่อเข้าร่วมกิจกรรมไปแล้ว ไม่สามารถลงชื่อซ้ำได้ครับ/ค่ะ`);
+                return;
+            }
+
+            // บันทึกลงฐานข้อมูล Firebase
+            fetch(DB_URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    groupId: groupId,
+                    groupName: group.name,
+                    name: name,
+                    timestamp: new Date().toISOString()
+                })
+            })
+            .then(res => res.json())
+            .then(() => {
+                inputElement.value = "";
+                fetchDatabase(); // โหลดข้อมูลทันที
+            })
+            .catch(err => {
+                alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " + err.message);
+            });
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/[&<>"']/g, function(m) { 
+                return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]; 
+            });
+        }
+
+        // โหลดข้อมูลครั้งแรก และ Real-time polling ทุก 3 วินาที
         fetchDatabase();
         setInterval(fetchDatabase, 3000);
     </script>
