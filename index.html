@@ -68,7 +68,7 @@
 
         <!-- Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16 print-layout" id="groups-container">
-            <!-- Render JS Dynamic Cards -->
+            <!-- Dynamic Cards Rendered by JS -->
         </div>
     </div>
 
@@ -84,31 +84,68 @@
             { id: 5, name: "บันไดทางขึ้นเรือนนอนหญิง / ประตูเล้าไก่ / ประตูห้องน้ำหญิง", leader: "คุณวสันต์ ทองปลิว", max: 6, detail: "1. ซ่อมบันไดทางขึ้นเรือนนอนหญิง 2. ติดตั้งประตูเล้าไก่ใหม่ 3. ติดลูกบิดห้องน้ำหญิงใหม่ 4. ซ่อมกรอบประตูห้องน้ำหญิง" },
             { id: 6, name: "ติดตั้งป้ายมูลนิธิ / ทาสีหน้าทางเข้า", leader: "คุณพัชราภรณ์ แก้วกัญญา", max: 2, detail: "1. ติดตั้งป้ายมูลนิธิใหม่ 2. ทาสีบริเวณปูนด้านหน้า" },
             { id: 7, name: "ระบบไฟ", leader: "คุณสุวิทย์ พรมเวียง", max: 3, detail: "ซ่อมไฟสำนักงาน, ซ่อมไฟห้องพยาบาล, ซ่อมไฟทางเดิน และไฟด้านหลังห้องพยาบาล" },
-            { id: 8, name: "กิจกรรมสันทนาการ", leader: "จอย, ฟี, หมี", max: 3, detail: "พาน้องๆ ร้องเพลง และทำกิจกรรมสนุกสนาม" }
+            { id: 8, name: "กิจกรรมสันทนาการ", leader: "💖", max: 3, detail: "พาน้องๆ ร้องเพลง และทำกิจกรรมสนุกสนาม" }
         ];
 
         let globalData = {};
         let registeredNamesList = [];
-        let isInitialRender = true;
 
+        // 1. สร้าง โครงสร้างการ์ด (Cards Outline) ทันทีที่โหลดหน้าเว็บ
+        function initCards() {
+            const container = document.getElementById('groups-container');
+            let htmlContent = '';
+            
+            GROUPS_CONFIG.forEach(group => {
+                htmlContent += `
+                    <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card" id="card-${group.id}">
+                        <div>
+                            <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-5" id="header-${group.id}">
+                                <div class="flex justify-between items-start">
+                                    <h3 class="font-bold text-lg">กลุ่มที่ ${group.id}: ${escapeHtml(group.name)}</h3>
+                                    <span class="text-xs bg-emerald-800 text-white px-2.5 py-1 rounded-full font-semibold whitespace-nowrap" id="status-${group.id}">
+                                        0/${group.max}
+                                    </span>
+                                </div>
+                                <p class="text-xs text-emerald-100 font-medium mt-1">👑 นำทีมโดย: ${escapeHtml(group.leader)}</p>
+                                <p class="text-xs text-slate-200 opacity-90 mt-2 bg-black/10 p-2 rounded-lg">${escapeHtml(group.detail)}</p>
+                            </div>
+
+                            <ul class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1 max-h-60 overflow-y-auto" id="list-${group.id}">
+                                <li class="py-6 text-center text-slate-400 italic font-light">กำลังโหลดข้อมูล...</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-4 bg-slate-50 border-t border-slate-100 input-section">
+                            <div class="flex gap-2">
+                                <input type="text" id="input-${group.id}" 
+                                    placeholder="กรอกชื่อ-นามสกุล" 
+                                    class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:bg-slate-200 disabled:cursor-not-allowed">
+                                <button onclick="register(${group.id})" id="btn-${group.id}"
+                                    class="bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-semibold text-sm px-4 py-2 rounded-lg transition duration-150 whitespace-nowrap disabled:cursor-not-allowed">
+                                    ลงชื่อ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = htmlContent;
+        }
+
+        // 2. ดึงข้อมูลจาก Firebase
         function fetchDatabase() {
             fetch(DB_URL)
                 .then(res => res.json())
                 .then(data => {
-                    const newData = data || {};
-                    // เช็คว่าข้อมูลเปลี่ยนไปไหม ถ้าไม่เปลี่ยน ไม่ต้องวาดหน้าจอใหม่
-                    if (JSON.stringify(newData) !== JSON.stringify(globalData)) {
-                        globalData = newData;
-                        renderUI();
-                    }
+                    globalData = data || {};
+                    updateUI();
                 })
                 .catch(err => console.error("Error fetching data:", err));
         }
 
-        function renderUI() {
-            const container = document.getElementById('groups-container');
+        // 3. อัปเดตเฉพาะเนื้อหารายชื่อและสถานะ
+        function updateUI() {
             registeredNamesList = [];
-
             let groupedMembers = {};
             GROUPS_CONFIG.forEach(g => groupedMembers[g.id] = []);
 
@@ -121,47 +158,6 @@
                 }
             });
 
-            // สร้างการ์ดครั้งแรก
-            if (isInitialRender) {
-                let htmlContent = '';
-                GROUPS_CONFIG.forEach(group => {
-                    htmlContent += `
-                        <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card" id="card-${group.id}">
-                            <div>
-                                <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-5" id="header-${group.id}">
-                                    <div class="flex justify-between items-start">
-                                        <h3 class="font-bold text-lg">กลุ่มที่ ${group.id}: ${escapeHtml(group.name)}</h3>
-                                        <span class="text-xs bg-emerald-800 text-white px-2.5 py-1 rounded-full font-semibold whitespace-nowrap" id="status-${group.id}">
-                                            0/${group.max}
-                                        </span>
-                                    </div>
-                                    <p class="text-xs text-emerald-100 font-medium mt-1">👑 นำทีมโดย: ${escapeHtml(group.leader)}</p>
-                                    <p class="text-xs text-slate-200 opacity-90 mt-2 bg-black/10 p-2 rounded-lg">${escapeHtml(group.detail)}</p>
-                                </div>
-
-                                <ul class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1 max-h-60 overflow-y-auto" id="list-${group.id}">
-                                </ul>
-                            </div>
-
-                            <div class="p-4 bg-slate-50 border-t border-slate-100 input-section">
-                                <div class="flex gap-2">
-                                    <input type="text" id="input-${group.id}" 
-                                        placeholder="กรอกชื่อ-นามสกุล" 
-                                        class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:bg-slate-200 disabled:cursor-not-allowed">
-                                    <button onclick="register(${group.id})" id="btn-${group.id}"
-                                        class="bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-semibold text-sm px-4 py-2 rounded-lg transition duration-150 whitespace-nowrap disabled:cursor-not-allowed">
-                                        ลงชื่อ
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                container.innerHTML = htmlContent;
-                isInitialRender = false;
-            }
-
-            // อัปเดตเฉพาะข้อมูลรายชื่อและสถานะเต็ม โดยไม่ทับช่อง Input
             GROUPS_CONFIG.forEach(group => {
                 const members = groupedMembers[group.id] || [];
                 const count = members.length;
@@ -173,7 +169,8 @@
                 const inputEl = document.getElementById(`input-${group.id}`);
                 const btnEl = document.getElementById(`btn-${group.id}`);
 
-                // อัปเดตสี Header & Status
+                if (!headerEl) return;
+
                 if (isFull) {
                     headerEl.className = "bg-gradient-to-r from-slate-600 to-slate-700 text-white p-5";
                     statusEl.className = "text-xs bg-red-500 text-white px-2.5 py-1 rounded-full font-semibold whitespace-nowrap";
@@ -184,12 +181,10 @@
                     statusEl.innerText = `${count}/${group.max}`;
                 }
 
-                // อัปเดตสถานะการป้อนข้อมูล
                 inputEl.disabled = isFull;
                 btnEl.disabled = isFull;
                 inputEl.placeholder = isFull ? "กลุ่มนี้เต็มแล้ว" : "กรอกชื่อ-นามสกุล";
 
-                // อัปเดตเฉพาะรายการคนลงชื่อ
                 listEl.innerHTML = members.length === 0 
                     ? `<li class="py-6 text-center text-slate-400 italic font-light">ยังไม่มีผู้ลงทะเบียน</li>`
                     : members.map((m, idx) => `
@@ -201,7 +196,7 @@
             });
         }
 
-        // ➕ ฟังก์ชันบันทึกข้อมูล
+        // ➕ ลงทะเบียน
         function register(groupId) {
             const inputElement = document.getElementById(`input-${groupId}`);
             const name = inputElement.value.trim();
@@ -237,7 +232,7 @@
             });
         }
 
-        // 🗑️ ฟังก์ชันยกเลิกการลงทะเบียน
+        // 🗑️ ยกเลิกการลงทะเบียน
         function cancelRegistration() {
             const inputElement = document.getElementById('cancel-name-input');
             const targetName = inputElement.value.trim();
@@ -285,6 +280,8 @@
             });
         }
 
+        // เริ่มทำงาน
+        initCards();
         fetchDatabase();
         setInterval(fetchDatabase, 3000);
     </script>
