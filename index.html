@@ -40,10 +40,23 @@
 
     <div class="max-w-7xl mx-auto">
         <!-- Header -->
-        <div class="text-center mb-8">
+        <div class="text-center mb-6">
             <span class="bg-emerald-50 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider shadow-sm">CSR Activity</span>
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">🌱 ลงทะเบียนเข้าร่วมกิจกรรม CSR</h1>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">🤝 ลงทะเบียนเข้าร่วมกิจกรรม CSR</h1>
             <p class="text-slate-500 mt-2 text-sm">เลือกกลุ่มที่ต้องการและกรอกชื่อ-นามสกุลเพื่อลงทะเบียน (Real-Time)</p>
+        </div>
+
+        <!-- 🚫 ส่วนยกเลิกการลงทะเบียน (เฉพาะหน้าเว็บ ซ่อนเมื่อสั่งพิมพ์) -->
+        <div class="max-w-md mx-auto mb-8 bg-white p-4 rounded-2xl shadow-sm border border-slate-200 no-print">
+            <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 text-center">❌ ยกเลิกการลงทะเบียน</h3>
+            <div class="flex gap-2">
+                <input type="text" id="cancel-name-input" placeholder="กรอกชื่อ-นามสกุล ที่ต้องการยกเลิก" 
+                    class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500">
+                <button onclick="cancelRegistration()" 
+                    class="bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm px-4 py-2 rounded-lg transition duration-150 whitespace-nowrap shadow-sm shadow-rose-600/20">
+                    ยกเลิก
+                </button>
+            </div>
         </div>
 
         <!-- Print Button -->
@@ -61,19 +74,18 @@
     </div>
 
     <script>
-        // 🔗 ดึงข้อมูลจากฐานข้อมูล Firebase เดียวกับโค้ดของคุณ
-        const DB_URL = "https://safety-training-ce6df-default-rtdb.firebaseio.com/csr_registrations.json";
+        const BASE_URL = "https://safety-training-ce6df-default-rtdb.firebaseio.com/csr_registrations";
+        const DB_URL = `${BASE_URL}.json`;
 
-        // 📋 โครงสร้างกลุ่มทั้ง 8 กลุ่มตามเอกสาร
         const GROUPS_CONFIG = [
-            { id: 1, name: "บ้านเด็กชาย", leader: "คุณวรวุฒิ เรืองยิ่ง", max: 20, detail: "1. นำตาข่ายล้อมรอบบริเวณหลังคาด้านบน 2. ทำความสะอาดเรือนนอนชายทั้ง 2 ฝั่ง" },
-            { id: 2, name: "ห้องน้ำเด็กชาย", leader: "คุณกิรติพงษ์ มหาคุณ", max: 16, detail: "1. ทำความสะอาดห้องน้ำ 2. ทาสี" },
-            { id: 3, name: "ห้องพยาบาล และ ศาลา", leader: "คุณอรรถพล ปูษณาค", max: 6, detail: "1. ทาสีศาลา 2. ทาสีรั้วด้านนอกห้องพยาบาล" },
+            { id: 1, name: "บ้านเด็กชาย", leader: "คุณวรวุฒิ เรืองฤดี", max: 20, detail: "1. นำตาข่ายล้อมรอบบริเวณหลังคาด้านบน 2. ทำความสะอาดเรือนนอนชายทั้ง 2 ฝั่ง" },
+            { id: 2, name: "ห้องน้ำเด็กชาย", leader: "คุณกิรติพงษ์ นาคุณ", max: 16, detail: "1. ทำความสะอาดห้องน้ำ 2. ทาสี" },
+            { id: 3, name: "ห้องพยาบาล และศาลา", leader: "คุณอรรถพล บุษภาค", max: 6, detail: "1. ทาสีศาลา 2. ทาสีรั้วด้านนอกห้องพยาบาล" },
             { id: 4, name: "เปลี่ยนสแลน / ติดตั้งพัดลม / เปลี่ยนตาข่ายโกลฟุตบอล", leader: "คุณมงคล เสาเวียง", max: 3, detail: "1. เปลี่ยนสแลนบริเวณประตูหลัง 2. เปลี่ยนตาข่ายโกลฟุตบอลหน้าเรือนนอนหญิง 3. ติดตั้งพัดลมบริเวณหน้าห้องน้ำชาย" },
             { id: 5, name: "บันไดทางขึ้นเรือนนอนหญิง / ประตูเล้าไก่ / ประตูห้องน้ำหญิง", leader: "คุณวสันต์ ทองปลิว", max: 6, detail: "1. ซ่อมบันไดทางขึ้นเรือนนอนหญิง 2. ติดตั้งประตูเล้าไก่ใหม่ 3. ติดลูกบิดห้องน้ำหญิงใหม่ 4. ซ่อมกรอบประตูห้องน้ำหญิง" },
             { id: 6, name: "ติดตั้งป้ายมูลนิธิ / ทาสีหน้าทางเข้า", leader: "คุณพัชราภรณ์ แก้วกัญญา", max: 2, detail: "1. ติดตั้งป้ายมูลนิธิใหม่ 2. ทาสีบริเวณปูนด้านหน้า" },
-            { id: 7, name: "ระบบไฟ", leader: "คุณสุวิทย์ พรมเวียง", max: 3, detail: "ซ่อมไฟสำนักงาน, ซ่อมไฟห้องพยาบาล, ซ่อมไฟทางเดิน และไฟด้านหลังห้องพยาบาล" },
-            { id: 8, name: "กิจกรรมสันทนาการ", leader: "จอย, ฟี, หมี", max: 3, detail: "พาน้องๆ ร้องเพลง และทำกิจกรรมสนุกสนาม" }
+            { id: 7, name: "ระบบไฟ", leader: "คุณสุวิทย์ พรมเวียง", max: 2, detail: "ซ่อมไฟสำนักงาน, ซ่อมไฟห้องพยาบาล, ซ่อมไฟห้องน้ำครู, ซ่อมไฟห้องน้ำชาย และซ่อมไฟเรือนนอนชาย" },
+            { id: 8, name: "กิจกรรมสันทนาการ", leader: "💓", max: 3, detail: "พาน้องๆ ร้องเพลง และทำกิจกรรมสนุกสนาม" }
         ];
 
         let globalData = {};
@@ -91,9 +103,8 @@
 
         function renderUI() {
             const container = document.getElementById('groups-container');
-            registeredNamesList = []; // รีเซ็ตรายชื่อเพื่อเช็คซ้ำ
+            registeredNamesList = [];
 
-            // จัดกลุ่มรายชื่อจาก Firebase
             let groupedMembers = {};
             GROUPS_CONFIG.forEach(g => groupedMembers[g.id] = []);
 
@@ -116,7 +127,6 @@
                 htmlContent += `
                     <div class="bg-white rounded-2xl shadow-md border border-slate-100 overflow-hidden flex flex-col justify-between print-card">
                         <div>
-                            <!-- Card Header -->
                             <div class="bg-gradient-to-r ${isFull ? 'from-slate-600 to-slate-700' : 'from-emerald-600 to-teal-600'} text-white p-5">
                                 <div class="flex justify-between items-start">
                                     <h3 class="font-bold text-lg">กลุ่มที่ ${group.id}: ${escapeHtml(group.name)}</h3>
@@ -128,7 +138,6 @@
                                 <p class="text-xs text-slate-200 opacity-90 mt-2 bg-black/10 p-2 rounded-lg">${escapeHtml(group.detail)}</p>
                             </div>
 
-                            <!-- List Section -->
                             <ul class="p-4 divide-y divide-slate-100 text-sm text-slate-600 space-y-1 max-h-60 overflow-y-auto">
                                 ${members.length === 0 
                                     ? `<li class="py-6 text-center text-slate-400 italic font-light">ยังไม่มีผู้ลงทะเบียน</li>`
@@ -142,7 +151,6 @@
                             </ul>
                         </div>
 
-                        <!-- Form Input Section -->
                         <div class="p-4 bg-slate-50 border-t border-slate-100 input-section">
                             <div class="flex gap-2">
                                 <input type="text" id="input-${group.id}" 
@@ -165,7 +173,7 @@
             }
         }
 
-        // ➕ ฟังก์ชันบันทึกข้อมูลไปยัง Firebase Realtime Database
+        // ➕ ฟังก์ชันบันทึกข้อมูล
         function register(groupId) {
             const inputElement = document.getElementById(`input-${groupId}`);
             const name = inputElement.value.trim();
@@ -176,13 +184,11 @@
                 return;
             }
 
-            // 🚫 ตรวจสอบการลงชื่อซ้ำ
             if (registeredNamesList.includes(name.toLowerCase())) {
                 alert(`คุณ "${name}" ได้ลงชื่อเข้าร่วมกิจกรรมไปแล้ว ไม่สามารถลงชื่อซ้ำได้ครับ/ค่ะ`);
                 return;
             }
 
-            // บันทึกลงฐานข้อมูล Firebase
             fetch(DB_URL, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -196,11 +202,55 @@
             .then(res => res.json())
             .then(() => {
                 inputElement.value = "";
-                fetchDatabase(); // โหลดข้อมูลทันที
+                fetchDatabase();
             })
             .catch(err => {
                 alert("เกิดข้อผิดพลาดในการบันทึกข้อมูล: " + err.message);
             });
+        }
+
+        // 🗑️ ฟังก์ชันยกเลิกการลงทะเบียน
+        function cancelRegistration() {
+            const inputElement = document.getElementById('cancel-name-input');
+            const targetName = inputElement.value.trim();
+
+            if (!targetName) {
+                alert("กรุณากรอกชื่อ-นามสกุลที่ต้องการยกเลิก");
+                return;
+            }
+
+            // ค้นหา Key ของชื่อที่ต้องการลบใน globalData
+            let targetKey = null;
+            let targetGroupName = "";
+
+            Object.keys(globalData).forEach(key => {
+                let item = globalData[key];
+                if (item && item.name && item.name.trim().toLowerCase() === targetName.toLowerCase()) {
+                    targetKey = key;
+                    targetGroupName = item.groupName || `กลุ่มที่ ${item.groupId}`;
+                }
+            });
+
+            if (!targetKey) {
+                alert(`ไม่พบชื่อ "${targetName}" ในระบบลงทะเบียน`);
+                return;
+            }
+
+            // ยืนยันก่อนลบ
+            if (confirm(`คุณต้องการยกเลิกการลงทะเบียนของ "${targetName}" จาก${targetGroupName} ใช่หรือไม่?`)) {
+                fetch(`${BASE_URL}/${targetKey}.json`, {
+                    method: "DELETE"
+                })
+                .then(res => res.json())
+                .then(() => {
+                    alert(`ยกเลิกการลงทะเบียนของคุณ "${targetName}" เรียบร้อยแล้ว`);
+                    inputElement.value = "";
+                    fetchDatabase();
+                })
+                .catch(err => {
+                    alert("เกิดข้อผิดพลาดในการยกเลิก: " + err.message);
+                });
+            }
         }
 
         function escapeHtml(text) {
@@ -209,7 +259,6 @@
             });
         }
 
-        // โหลดข้อมูลครั้งแรก และ Real-time polling ทุก 3 วินาที
         fetchDatabase();
         setInterval(fetchDatabase, 3000);
     </script>
